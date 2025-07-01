@@ -1,0 +1,35 @@
+# Trabalho final: Desenvolvimento de jogos digitais (DCC192)
+    Desenvolvimento de jogo estilo tower defense usando a biblioteca SDL 2.
+
+
+### To-Do's:
+
+    [B-ok] Preencher mapa da fase 1 usando os os tiles separados anteriormente
+
+    [B-ok] Criar classe de inimigo: Slime - baseada na classe do Mario
+
+    [] Criar classe de inimigo: Bee - baseada na classe do Mario
+
+    [] Criar classe de inimigo: Ogre - baseada na classe do Mario
+
+    [B-ok] Criar classe do gerador de ondas de inimigos: EnemyPortal
+
+    [B-ok] Criar classe da base a ser defendida: Base
+
+    [] Criar classe das torres - Se inspirar na nave do "asteroids"
+
+    [] Defínir comportamento do projétil (particula) de cada tipo de torre - Se inspirar nos tiros do "asteroids"
+
+    [F-ok] Criar locais de construção das torres
+
+    [F-ok] Criar HUD principal da fase
+    
+    [F-ok] Criar HUD secundário (pause) da fase
+
+    [] Criar barra de vida dos inimigos
+
+    [A-ok] Criar um menu principal interessante
+
+    [A-ok] Definir sons do menu e da fase
+
+    [] Definir tela de GameOver
