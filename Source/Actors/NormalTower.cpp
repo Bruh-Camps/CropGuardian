@@ -51,12 +51,12 @@ void NormalTower::OnUpdate(float deltaTime) {
         std::vector<Actor*> nearbyActors = mGame->GetNearbyActors(correctedPos, 3);
 
         for (Actor* actor : nearbyActors) {
-            if (auto slime = dynamic_cast<Slime*>(actor)) {
-                float distance = (slime->GetPosition() - correctedPos).Length();
+            if (auto enemy = dynamic_cast<Enemy*>(actor)) {
+                float distance = (enemy->GetPosition() - correctedPos).Length();
 
                 if (distance <= closestDistance) {
                     closestDistance = distance;
-                    mCurrentTarget = slime;
+                    mCurrentTarget = enemy;
                 }
             }
         }
