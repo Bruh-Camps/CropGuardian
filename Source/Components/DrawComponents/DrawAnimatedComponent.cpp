@@ -75,10 +75,7 @@ void DrawAnimatedComponent::Draw(SDL_Renderer* renderer, const Vector3 &modColor
 
     if (mOwner->GetState() == ActorState::Active)
     {
-        if (auto slime = dynamic_cast<Slime*>(mOwner) )
-        {
-            slime->DrawLifeBar(renderer);
-        }
+        mOwner->DrawLifeBar(renderer);
     }
 }
 

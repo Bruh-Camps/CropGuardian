@@ -143,10 +143,8 @@ void Slime::UpdateDirectionFromCurrentBlock()
     switch (tileID)
     {
         case 12: // Canto inferior direito
-            if (mCurrentMovementDirection == MovementDirection::Right) {
-                this->TakeDamage(20.0f);
+            if (mCurrentMovementDirection == MovementDirection::Right)
                 mCurrentMovementDirection = MovementDirection::Up;
-            }
             else if (mCurrentMovementDirection == MovementDirection::Down)
                 mCurrentMovementDirection = MovementDirection::Left;
             break;

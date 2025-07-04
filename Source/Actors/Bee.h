@@ -10,31 +10,48 @@
 class Bee : public Actor
 {
 public:
-    explicit Bee(Game* game, float forwardSpeed = 150.0f, float deathTime = 0.3f, float life = 40.0f);
+    enum class MovementDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right
+    };
+
+    explicit Bee(class Game* game, float forwardSpeed = 120.0f, float deathTime = 0.4f, float life = 70.0f);
 
     void OnUpdate(float deltaTime) override;
+
     void Kill() override;
     void TakeDamage(float damage);
-    void DrawLifeBar(SDL_Renderer* renderer);
+
+    void DrawLifeBar(SDL_Renderer* renderer) override;
 
     bool IsHealthBarVisible() const { return mHealthBarVisibleTimer > 0.0f; }
     float GetCurrentLife() const { return mCurrentLife; }
     float GetMaxLife() const { return mMaxLife; }
 
 private:
-    float mForwardSpeed;
-    float mMaxLife;
-    float mCurrentLife;
-    float mDyingTimer;
-    float mHealthBarVisibleTimer;
-    float mSineTime;
+    void UpdateDirectionFromCurrentBlock();
+    void ApplyBeeMovement(float deltaTime);
 
     bool mIsDying;
+    float mDyingTimer;
+
+    float mMaxLife;
+    float mCurrentLife;
+    float mHealthBarVisibleTimer;
+
+    float mForwardSpeed;
+    MovementDirection mCurrentMovementDirection;
+
+    float mOscillationTimer;
+    float mOscillationFrequency;
+    float mOscillationAmplitude;
 
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;
     class AABBColliderComponent* mColliderComponent;
 
-    void UpdateSineMovement(float deltaTime);
-    float kHealthBarDisplayTime = 2.0f;
+    const float kHealthBarDisplayTime = 2.0f;
 };

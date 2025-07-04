@@ -8,7 +8,8 @@
 
 #pragma once
 #include <vector>
-#include <SDL2/SDL_stdinc.h>
+#include <SDL_stdinc.h>
+#include "SDL_render.h"
 #include "../Math.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
@@ -79,6 +80,8 @@ public:
     virtual void OnHorizontalCollision(const float minOverlap, AABBColliderComponent* other);
     virtual void OnVerticalCollision(const float minOverlap, AABBColliderComponent* other);
     virtual void Kill();
+
+    virtual void DrawLifeBar(SDL_Renderer* renderer) {}
 
 protected:
     class Game* mGame;

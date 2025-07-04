@@ -7,7 +7,7 @@
 // ----------------------------------------------------------------
 
 #pragma once
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <vector>
 #include <unordered_map>
 #include "AudioSystem.h"
@@ -32,7 +32,6 @@ public:
     static const int TILE_PLACE_BR = 5;   // bottom-right
     static const int BUILD_SPOT_W  = 2 * TILE_SIZE;
     static const int BUILD_SPOT_H  = 2 * TILE_SIZE;
-
 
     enum class GameScene
     {
@@ -125,6 +124,13 @@ public:
 
     void PlaySound(const std::string& soundName, bool looping = false);
 
+    void AdvanceToNextLevel();
+    int GetCurrentLevel() const { return mCurrentLevel; }
+
+    int GetEnemiesPerWaveForCurrentLevel() const;
+    float GetEnemySpawnIntervalForCurrentLevel() const;
+    float GetBeeSpawnChanceForCurrentLevel() const;
+
 private:
     void ProcessInput();
     void UpdateGame();
@@ -190,6 +196,7 @@ private:
     float mGameTimer;
     int mLevelTimer;
     int mLevelCoins;
+    int mCurrentLevel;
 
     SDL_Texture *mBackgroundTexture;
     Vector2 mBackgroundSize;

@@ -11,9 +11,9 @@
 #include <fstream>
 #include <map>
 #include <vector>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include "CSV.h"
 #include "Random.h"
 #include "Game.h"
@@ -196,7 +196,7 @@ void Game::ChangeScene()
         LoadLevel("../Assets/Levels/level1.csv", LEVEL_WIDTH, LEVEL_HEIGHT);
 
         // Portal que gera os inimigos
-        auto portal = new EnemyPortal(this, 1, 5, 8.0f, 10.0f);
+        auto portal = new EnemyPortal(this, 5, 8.0f, 10.0f);
         portal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
 
         // Base a ser defendida (o número de vidas deve condizer com o HUD)
@@ -934,4 +934,27 @@ void Game::PlaySound(const std::string& soundName, bool looping)
     {
         mAudio->PlaySound(soundName, looping);
     }
+}
+
+void Game::AdvanceToNextLevel()
+{
+    mCurrentLevel++;
+}
+
+int Game::GetEnemiesPerWaveForCurrentLevel() const
+{
+    // Adiciona 2 inimigos na wave a cada fase
+    return 3 + (mCurrentLevel - 1) * 2;
+}
+
+float Game::GetEnemySpawnIntervalForCurrentLevel() const
+{
+    // O intervalo de spawn diminui em 0.2s, com um mínimo de 0.5s
+    return std::max(0.5f, 2.0f - (mCurrentLevel - 1) * 0.2f);
+}
+
+float Game::GetBeeSpawnChanceForCurrentLevel() const
+{
+    // A chance de uma abelha aparecer aumenta 10% a cada fase, com um máximo de 60%
+    return std::min(0.6f, (mCurrentLevel - 1) * 0.10f);
 }

@@ -6,7 +6,7 @@
 #include "../Component.h"
 #include "../../Math.h"
 #include <vector>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 class DrawComponent : public Component
 {

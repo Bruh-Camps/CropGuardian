@@ -1,6 +1,6 @@
 #pragma once
 
-#include "SDL2/SDL_render.h"
+#include "SDL_render.h"
 #include "Actor.h"
 
 class Slime : public Actor
@@ -26,7 +26,7 @@ public:
     void UpdateMovementDirection();
     MovementDirection GetCurrentMovementDirection() const { return mCurrentMovementDirection; }
 
-    void DrawLifeBar(SDL_Renderer* renderer);
+    void DrawLifeBar(SDL_Renderer* renderer) override;
 
     bool IsHealthBarVisible() const { return mHealthBarVisibleTimer > 0.0f; }
     float GetCurrentLife() const { return mCurrentLife; }
