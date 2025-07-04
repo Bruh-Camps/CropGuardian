@@ -19,6 +19,7 @@ install_manifest.txt
 *.lib
 *.o
 *.obj
+external/*
 
 # Logs
 *.log
