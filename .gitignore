@@ -1,0 +1,41 @@
+# Build
+cmake-build-*/
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+CMakeScripts/
+Makefile
+cmake_install.cmake
+install_manifest.txt
+
+# Compiled binaries
+*.out
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.o
+*.obj
+
+# Logs
+*.log
+
+# Editor-specific files
+.idea/
+.vscode/
+*.sublime-workspace
+*.sublime-project
+
+# MacOS / Linux / Windows system files
+.DS_Store
+Thumbs.db
+
+# Ignore user-specific settings or temporary files
+*.swp
+*.tmp
+
+# Generated Assets (if any)
+Assets/generated/
