@@ -24,7 +24,7 @@
 #include "Actors/Actor.h"
 #include "Actors/Base.h"
 #include "Actors/Block.h"
-#include "Actors/Slime.h"
+#include "Actors/Enemy/Slime.h"
 #include "Actors/NormalTower.h"
 #include "Actors/BuildSpot.h"
 #include "Actors/EnemyPortal.h"

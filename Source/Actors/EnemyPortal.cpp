@@ -2,8 +2,8 @@
 #include "../Game.h"
 #include "../Components/DrawComponents/DrawSpriteComponent.h"
 #include "../Components/DrawComponents/DrawAnimatedComponent.h"
-#include "Slime.h"
-#include "Bee.h"
+#include "Enemy/Slime.h"
+#include "Enemy/Bee.h"
 #include "../Random.h"
 #include "../MainHUD.h"
 

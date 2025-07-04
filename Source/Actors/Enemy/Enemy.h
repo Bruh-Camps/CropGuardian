@@ -4,10 +4,10 @@
 
 #pragma once
 
-#include "SDL_render.h"
-#include "Actor.h"
+#include "../Actor.h"
+#include <string>
 
-class Bee : public Actor
+class Enemy : public Actor
 {
 public:
     enum class MovementDirection
@@ -18,22 +18,23 @@ public:
         Right
     };
 
-    explicit Bee(class Game* game, float forwardSpeed = 120.0f, float deathTime = 0.4f, float life = 70.0f);
+    Enemy(class Game* game, float forwardSpeed, float deathTime, float life, int coinReward,
+          const std::string& spriteSheet, const std::string& spriteJson);
 
     void OnUpdate(float deltaTime) override;
 
-    void Kill() override;
     void TakeDamage(float damage);
-
+    void Kill() override;
     void DrawLifeBar(SDL_Renderer* renderer) override;
 
     bool IsHealthBarVisible() const { return mHealthBarVisibleTimer > 0.0f; }
     float GetCurrentLife() const { return mCurrentLife; }
     float GetMaxLife() const { return mMaxLife; }
 
-private:
+protected:
+    virtual void UpdateMovement(float deltaTime) = 0;
+
     void UpdateDirectionFromCurrentBlock();
-    void ApplyBeeMovement(float deltaTime);
 
     bool mIsDying;
     float mDyingTimer;
@@ -43,11 +44,8 @@ private:
     float mHealthBarVisibleTimer;
 
     float mForwardSpeed;
+    int mCoinReward;
     MovementDirection mCurrentMovementDirection;
-
-    float mOscillationTimer;
-    float mOscillationFrequency;
-    float mOscillationAmplitude;
 
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;

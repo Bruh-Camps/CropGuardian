@@ -3,7 +3,7 @@
 //
 
 #include "NormalArrow.h"
-#include "Slime.h"
+#include "Enemy/Slime.h"
 #include "../Game.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/DrawComponents/DrawSpriteComponent.h"

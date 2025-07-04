@@ -1,6 +1,6 @@
 #include "Base.h"
 
-#include "Slime.h"
+#include "Enemy/Slime.h"
 #include "../Game.h"
 #include "../MainHUD.h"
 #include "../Components/DrawComponents/DrawSpriteComponent.h"

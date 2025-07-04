@@ -1,0 +1,135 @@
+//
+// Created by fredb on 7/4/2025.
+//
+
+#include "Enemy.h"
+#include "../../Game.h"
+#include "../../Components/DrawComponents/DrawAnimatedComponent.h"
+#include "../../Components/RigidBodyComponent.h"
+#include "../../Components/ColliderComponents/AABBColliderComponent.h"
+
+Enemy::Enemy(Game* game, float forwardSpeed, float deathTime, float life, int coinReward,
+             const std::string& spriteSheet, const std::string& spriteJson)
+    : Actor(game)
+    , mIsDying(false)
+    , mDyingTimer(deathTime)
+    , mMaxLife(life)
+    , mCurrentLife(life)
+    , mHealthBarVisibleTimer(0.0f)
+    , mForwardSpeed(forwardSpeed)
+    , mCoinReward(coinReward)
+    , mCurrentMovementDirection(MovementDirection::Right)
+{
+    mRigidBodyComponent = new RigidBodyComponent(this, 1.0f);
+    mDrawComponent = new DrawAnimatedComponent(this, spriteSheet, spriteJson);
+
+    // mColliderComponent = new AABBColliderComponent(this, 0, 0, Game::TILE_SIZE, Game::TILE_SIZE, ColliderLayer::Enemy);
+}
+
+void Enemy::OnUpdate(float deltaTime)
+{
+    if (mIsDying)
+    {
+        mDyingTimer -= deltaTime;
+        if (mDyingTimer <= 0.0f) {
+            mState = ActorState::Destroy;
+        }
+        return;
+    }
+
+    if (mHealthBarVisibleTimer > 0.0f)
+    {
+        mHealthBarVisibleTimer -= deltaTime;
+    }
+
+    if (GetPosition().y > GetGame()->GetWindowHeight())
+    {
+        mState = ActorState::Destroy;
+    }
+
+    UpdateMovement(deltaTime);
+}
+
+void Enemy::TakeDamage(float damage)
+{
+    if (mIsDying) {
+        return;
+    }
+
+    mCurrentLife -= damage;
+    mHealthBarVisibleTimer = kHealthBarDisplayTime;
+
+    if (mCurrentLife <= 0.0f) {
+        mCurrentLife = 0.0f;
+        Kill();
+    }
+}
+
+void Enemy::Kill()
+{
+    mIsDying = true;
+    mDrawComponent->SetAnimation("dead");
+    mRigidBodyComponent->SetEnabled(false);
+    if(mColliderComponent) mColliderComponent->SetEnabled(false);
+    mGame->GetCurrentBase()->IncreaseCoinsBy(mCoinReward);
+}
+
+void Enemy::UpdateDirectionFromCurrentBlock()
+{
+    const int tileSize = Game::TILE_SIZE;
+    Vector2 position = this->GetPosition();
+
+    int tileX = static_cast<int>(position.x) / tileSize;
+    int tileY = static_cast<int>(position.y) / tileSize;
+
+    float offsetX = static_cast<float>(tileX) * tileSize + tileSize / 2.0f + 14.0f;
+    float offsetY = static_cast<float>(tileY) * tileSize + tileSize / 2.0f + 14.0f;
+
+    bool passedMiddle = false;
+    switch (mCurrentMovementDirection)
+    {
+        case MovementDirection::Right: passedMiddle = position.x >= offsetX; break;
+        case MovementDirection::Left:  passedMiddle = position.x <= offsetX; break;
+        case MovementDirection::Up:    passedMiddle = position.y <= offsetY; break;
+        case MovementDirection::Down:  passedMiddle = position.y >= offsetY; break;
+    }
+
+    if (!passedMiddle)
+        return;
+
+    int tileID = mGame->GetTileAt(tileX, tileY);
+
+    switch (tileID)
+    {
+        case 12: mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Right) ? MovementDirection::Up : MovementDirection::Left; break;
+        case 10: mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Right) ? MovementDirection::Down : MovementDirection::Left; break;
+        case 2:  mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Left) ? MovementDirection::Up : MovementDirection::Right; break;
+        case 17: mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Left) ? MovementDirection::Down : MovementDirection::Right; break;
+    }
+}
+
+void Enemy::DrawLifeBar(SDL_Renderer* renderer)
+{
+    if (this->IsHealthBarVisible())
+    {
+        Vector2 cameraPos = GetGame()->GetCameraPos();
+        const int barWidth = 40;
+        const int barHeight = 5;
+        const Vector2 barOffset = Vector2(15.0f, -15.0f);
+
+        Vector2 barPos;
+        barPos.x = mPosition.x + barOffset.x - cameraPos.x;
+        barPos.y = mPosition.y + barOffset.y - cameraPos.y;
+
+        SDL_Rect bgRect = { static_cast<int>(barPos.x - barWidth / 2.0f), static_cast<int>(barPos.y - barHeight / 2.0f), barWidth, barHeight };
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        SDL_RenderFillRect(renderer, &bgRect);
+
+        float lifePercent = mCurrentLife / mMaxLife;
+        int fgWidth = static_cast<int>(barWidth * lifePercent);
+
+        SDL_Rect fgRect = { static_cast<int>(barPos.x - barWidth / 2.0f), static_cast<int>(barPos.y - barHeight / 2.0f), fgWidth, barHeight };
+        SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
+        SDL_RenderFillRect(renderer, &fgRect);
+    }
+}

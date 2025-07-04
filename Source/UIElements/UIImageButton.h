@@ -6,7 +6,7 @@
 #include "UIElement.h"
 #include <functional>
 #include <string>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 
 class UIImageButton : public UIElement {
 public:

@@ -1,6 +1,6 @@
 #include "NormalTower.h"
 
-#include "Slime.h"
+#include "Enemy/Slime.h"
 #include "../Game.h"
 #include "../MainHUD.h"
 #include "../Actors/NormalArrow.h"

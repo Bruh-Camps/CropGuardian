@@ -4,7 +4,7 @@
 
 #include "DrawAnimatedComponent.h"
 #include "../../Actors/Actor.h"
-#include "../../Actors/Slime.h"
+#include "../../Actors/Enemy/Slime.h"
 #include "../../Game.h"
 #include "../../Json.h"
 #include <fstream>
