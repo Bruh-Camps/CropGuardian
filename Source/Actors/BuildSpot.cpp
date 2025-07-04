@@ -65,12 +65,10 @@ void BuildSpot::OnHoverExit()
 }
 
 void BuildSpot::BuildTower(TowerType type) {
-
     if (type == TowerType::Normal) {
         mTower = new NormalTower(mGame);
         mTower->SetPosition(mPosition - Vector2(0, 64));
         this->SetState(ActorState::Destroy);
-        SDL_Log("Tower built!");
     } else {
         SDL_Log("Invalid Tower type!");
     }
