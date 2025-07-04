@@ -24,9 +24,17 @@ void Slime::UpdateMovement(float deltaTime)
 
     switch (mCurrentMovementDirection)
     {
-        case MovementDirection::Right: mRigidBodyComponent->SetVelocity(Vector2::UnitX * mForwardSpeed); break;
-        case MovementDirection::Left:  mRigidBodyComponent->SetVelocity(Vector2::NegUnitX * mForwardSpeed); break;
-        case MovementDirection::Up:    mRigidBodyComponent->SetVelocity(Vector2::NegUnitY * mForwardSpeed); break;
-        case MovementDirection::Down:  mRigidBodyComponent->SetVelocity(Vector2::UnitY * mForwardSpeed); break;
+        case MovementDirection::Right:
+            mRigidBodyComponent->SetVelocity(Vector2::UnitX * mForwardSpeed);
+            break;
+        case MovementDirection::Left:
+            mRigidBodyComponent->SetVelocity(Vector2::NegUnitX * mForwardSpeed);
+            break;
+        case MovementDirection::Up:
+            mRigidBodyComponent->SetVelocity(Vector2::NegUnitY * mForwardSpeed);
+            break;
+        case MovementDirection::Down:
+            mRigidBodyComponent->SetVelocity(Vector2::UnitY * mForwardSpeed);
+            break;
     }
 }

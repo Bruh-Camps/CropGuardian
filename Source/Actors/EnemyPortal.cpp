@@ -69,16 +69,14 @@ void EnemyPortal::OnUpdate(float deltaTime) {
         {
             Actor* newEnemy = nullptr;
 
-            // if (Random::GetFloat() < mBeeSpawnChance)
-            // {
-            //     newEnemy = new Bee(mGame);
-            // }
-            // else
-            // {
-            //     newEnemy = new Slime(mGame);
-            // }
-
-            newEnemy = new Bee(mGame);
+            if (Random::GetFloat() < mBeeSpawnChance)
+            {
+                newEnemy = new Bee(mGame);
+            }
+            else
+            {
+                newEnemy = new Slime(mGame);
+            }
 
             Vector2 pos = Vector2(GetPosition().x + (Game::TILE_SIZE / 2.0f), GetPosition().y + (Game::TILE_SIZE / 2.0f));
             newEnemy->SetPosition(pos);

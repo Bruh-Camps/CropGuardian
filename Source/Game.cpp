@@ -177,6 +177,7 @@ void Game::ChangeScene()
     }
     else if (mNextScene == GameScene::Level1)
     {
+        mCurrentLevel = 1;
 
         // Zera as moedas e o ajusta o tempo (em segundos) entre as ondas
         mLevelTimer = 0;
@@ -196,7 +197,7 @@ void Game::ChangeScene()
         LoadLevel("../Assets/Levels/level1.csv", LEVEL_WIDTH, LEVEL_HEIGHT);
 
         // Portal que gera os inimigos
-        auto portal = new EnemyPortal(this, 5, 8.0f, 10.0f);
+        auto portal = new EnemyPortal(this, 3, 8.0f, 10.0f);
         portal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
 
         // Base a ser defendida (o número de vidas deve condizer com o HUD)

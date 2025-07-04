@@ -46,7 +46,7 @@ void Base::OnUpdate(float deltaTime) {
 
     for (Actor *actor: nearbyActors) {
         // Verifica se é um inimigo
-        if (dynamic_cast<Slime *>(actor)) {
+        if (dynamic_cast<Enemy*>(actor)) {
             Vector2 pos = actor->GetPosition();
             if (fabs(myPos.x - pos.x) < 10 && fabs(myPos.y - pos.y) < 50) {
 

@@ -88,10 +88,18 @@ void Enemy::UpdateDirectionFromCurrentBlock()
     bool passedMiddle = false;
     switch (mCurrentMovementDirection)
     {
-        case MovementDirection::Right: passedMiddle = position.x >= offsetX; break;
-        case MovementDirection::Left:  passedMiddle = position.x <= offsetX; break;
-        case MovementDirection::Up:    passedMiddle = position.y <= offsetY; break;
-        case MovementDirection::Down:  passedMiddle = position.y >= offsetY; break;
+        case MovementDirection::Right:
+            passedMiddle = position.x >= offsetX;
+            break;
+        case MovementDirection::Left:
+            passedMiddle = position.x <= offsetX;
+            break;
+        case MovementDirection::Up:
+            passedMiddle = position.y <= offsetY;
+            break;
+        case MovementDirection::Down:
+            passedMiddle = position.y >= offsetY;
+            break;
     }
 
     if (!passedMiddle)
@@ -101,10 +109,33 @@ void Enemy::UpdateDirectionFromCurrentBlock()
 
     switch (tileID)
     {
-        case 12: mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Right) ? MovementDirection::Up : MovementDirection::Left; break;
-        case 10: mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Right) ? MovementDirection::Down : MovementDirection::Left; break;
-        case 2:  mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Left) ? MovementDirection::Up : MovementDirection::Right; break;
-        case 17: mCurrentMovementDirection = (mCurrentMovementDirection == MovementDirection::Left) ? MovementDirection::Down : MovementDirection::Right; break;
+        case 12: // Canto inferior direito
+            if (mCurrentMovementDirection == MovementDirection::Right)
+                mCurrentMovementDirection = MovementDirection::Up;
+            else if (mCurrentMovementDirection == MovementDirection::Down)
+                mCurrentMovementDirection = MovementDirection::Left;
+        break;
+
+        case 10: // Canto superior direito
+            if (mCurrentMovementDirection == MovementDirection::Right)
+                mCurrentMovementDirection = MovementDirection::Down;
+            else if (mCurrentMovementDirection == MovementDirection::Up)
+                mCurrentMovementDirection = MovementDirection::Left;
+        break;
+
+        case 2: // Canto inferior esquerdo
+            if (mCurrentMovementDirection == MovementDirection::Left)
+                mCurrentMovementDirection = MovementDirection::Up;
+            else if (mCurrentMovementDirection == MovementDirection::Down)
+                mCurrentMovementDirection = MovementDirection::Right;
+        break;
+
+        case 17: // Canto superior esquerdo
+            if (mCurrentMovementDirection == MovementDirection::Left)
+                mCurrentMovementDirection = MovementDirection::Down;
+            else if (mCurrentMovementDirection == MovementDirection::Up)
+                mCurrentMovementDirection = MovementDirection::Right;
+        break;
     }
 }
 

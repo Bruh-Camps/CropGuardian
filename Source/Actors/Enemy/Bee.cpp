@@ -11,8 +11,8 @@ Bee::Bee(Game* game, float forwardSpeed, float deathTime, float life)
             "../Assets/Sprites/Bee/bee.png",
             "../Assets/Sprites/Bee/bee.json")
     , mOscillationTimer(0.0f)
-    , mOscillationFrequency(5.0f)
-    , mOscillationAmplitude(60.0f)
+    , mOscillationFrequency(10.0f)
+    , mOscillationAmplitude(15.0f)
 {
     mDrawComponent->AddAnimation("dead", {1, 2, 3, 4, 5});
     mDrawComponent->AddAnimation("fly", {6, 7, 8, 9, 10, 11});
@@ -24,25 +24,20 @@ Bee::Bee(Game* game, float forwardSpeed, float deathTime, float life)
 void Bee::UpdateMovement(float deltaTime)
 {
     UpdateDirectionFromCurrentBlock();
-    ApplyOscillationMovement(deltaTime);
-}
-
-void Bee::ApplyOscillationMovement(float deltaTime)
-{
-    mOscillationTimer += deltaTime;
-
-    Vector2 pathVelocity;
-    Vector2 oscillation;
-
-    float oscillationValue = sin(mOscillationTimer * mOscillationFrequency) * mOscillationAmplitude;
 
     switch (mCurrentMovementDirection)
     {
-        case MovementDirection::Right: pathVelocity = Vector2::UnitX * mForwardSpeed; oscillation.y = oscillationValue; break;
-        case MovementDirection::Left:  pathVelocity = Vector2::NegUnitX * mForwardSpeed; oscillation.y = oscillationValue; break;
-        case MovementDirection::Up:    pathVelocity = Vector2::NegUnitY * mForwardSpeed; oscillation.x = oscillationValue; break;
-        case MovementDirection::Down:  pathVelocity = Vector2::UnitY * mForwardSpeed; oscillation.x = oscillationValue; break;
+        case MovementDirection::Right:
+            mRigidBodyComponent->SetVelocity(Vector2::UnitX * mForwardSpeed);
+            break;
+        case MovementDirection::Left:
+            mRigidBodyComponent->SetVelocity(Vector2::NegUnitX * mForwardSpeed);
+            break;
+        case MovementDirection::Up:
+            mRigidBodyComponent->SetVelocity(Vector2::NegUnitY * mForwardSpeed);
+            break;
+        case MovementDirection::Down:
+            mRigidBodyComponent->SetVelocity(Vector2::UnitY * mForwardSpeed);
+            break;
     }
-
-    mRigidBodyComponent->SetVelocity(pathVelocity + oscillation);
 }
