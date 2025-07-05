@@ -7,7 +7,7 @@
 #include "../../Components/RigidBodyComponent.h"
 
 Bee::Bee(Game* game, float forwardSpeed, float deathTime, float life)
-    : Enemy(game, forwardSpeed, deathTime, life, 5,
+    : Enemy(game, forwardSpeed, deathTime, life, 12,
             "../Assets/Sprites/Bee/bee.png",
             "../Assets/Sprites/Bee/bee.json")
     , mOscillationTimer(0.0f)

@@ -940,13 +940,13 @@ void Game::PlaySound(const std::string& soundName, bool looping)
 
 void Game::SetupLevelProgression() {
     // Nível 1: 3 waves, 10s de espera
-    mLevelProgression.push_back({3, 10.0f, 5.0f});
+    mLevelProgression.push_back({3, 7.0f, 5.0f});
 
     // Nível 2: 5 waves, 8s de espera
-    mLevelProgression.push_back({5, 8.0f, 5.0f});
+    mLevelProgression.push_back({5, 5.0f, 5.0f});
 
     // Nível 3: 7 waves, 6s de espera
-    mLevelProgression.push_back({7, 6.0f, 3.0f});
+    mLevelProgression.push_back({7, 3.0f, 3.0f});
 }
 
 void Game::StartNextLevel() {
@@ -988,6 +988,6 @@ float Game::GetEnemySpawnIntervalForCurrentLevel() const
 
 float Game::GetBeeSpawnChanceForCurrentLevel() const
 {
-    // A chance de uma abelha aparecer aumenta 10% a cada fase, com um máximo de 60%
-    return std::min(0.6f, (mCurrentLevel - 1) * 0.10f);
+    // A chance de uma abelha aparecer aumenta 10% a cada fase, com um máximo de 60%. Inicia em 30%
+    return std::min(0.6f, 0.20f + (mCurrentLevel - 1) * 0.10f);
 }
