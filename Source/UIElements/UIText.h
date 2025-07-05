@@ -5,7 +5,7 @@
 #pragma once
 
 #include <string>
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include "../Math.h"
 #include "UIElement.h"
 

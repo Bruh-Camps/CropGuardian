@@ -3,7 +3,7 @@
 //
 
 #include "NormalArrow.h"
-#include "Slime.h"
+#include "Enemy/Enemy.h"
 #include "../Game.h"
 #include "../Components/RigidBodyComponent.h"
 #include "../Components/DrawComponents/DrawSpriteComponent.h"
@@ -60,8 +60,8 @@ void NormalArrow::OnUpdate(float deltaTime)
     // Verifica colisão
     float distance = (targetPos - myPos).Length();
     if (distance < 10.0f) {
-        if (auto slime = dynamic_cast<Slime*>(mCurrentTarget)) {
-            dynamic_cast<Slime*>(mCurrentTarget)->TakeDamage(mDamage);
+        if (auto enemy = dynamic_cast<Enemy*>(mCurrentTarget)) {
+            enemy->TakeDamage(mDamage);
         }
         SetState(ActorState::Destroy);
     }

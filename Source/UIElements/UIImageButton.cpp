@@ -3,7 +3,7 @@
 //
 
 #include "UIImageButton.h"
-#include <SDL2/SDL_image.h>
+#include <SDL_image.h>
 
 UIImageButton::UIImageButton(SDL_Renderer* renderer, const std::string& imagePath, std::function<void()> onClick,
                              const Vector2& pos, const Vector2& size, const Vector3& color)

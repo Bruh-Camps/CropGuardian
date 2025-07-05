@@ -26,6 +26,7 @@ public:
                                                       const float screenWidth,
                                                       const float screenHeight,
                                                       const float extraRadius = 0.0f) const;
+
 private:
     int mCellSize;
     int mWidth;

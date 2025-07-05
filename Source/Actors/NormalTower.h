@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Actor.h"
+#include "Enemy/Enemy.h"
 
 class NormalTower : public Actor{
     public:
@@ -15,5 +16,5 @@ class NormalTower : public Actor{
         float mRange;
         float mProjectileMoveForce;
         float mProjectileDamage;
-        Actor* mCurrentTarget;
+        Enemy* mCurrentTarget;
 };

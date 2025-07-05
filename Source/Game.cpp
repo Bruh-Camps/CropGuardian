@@ -11,9 +11,9 @@
 #include <fstream>
 #include <map>
 #include <vector>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_mixer.h>
+#include <SDL_image.h>
+#include <SDL_ttf.h>
+#include <SDL_mixer.h>
 #include "CSV.h"
 #include "Random.h"
 #include "Game.h"
@@ -24,7 +24,7 @@
 #include "Actors/Actor.h"
 #include "Actors/Base.h"
 #include "Actors/Block.h"
-#include "Actors/Slime.h"
+#include "Actors/Enemy/Slime.h"
 #include "Actors/NormalTower.h"
 #include "Actors/BuildSpot.h"
 #include "Actors/EnemyPortal.h"
@@ -127,7 +127,7 @@ bool Game::Initialize()
 void Game::SetGameScene(Game::GameScene scene, float transitionTime)
 {
     if (mSceneManagerState == SceneManagerState::None) {
-        if (scene == GameScene::MainMenu || scene == GameScene::Level1 || scene == GameScene::Level2 || scene == GameScene::GameOver) {
+        if (scene == GameScene::MainMenu || scene == GameScene::CornFieldsMap || scene == GameScene::Map2 || scene == GameScene::GameOver) {
             mNextScene = scene;
             mSceneManagerState = SceneManagerState::Entering;
             mSceneManagerTimer = transitionTime;
@@ -175,15 +175,18 @@ void Game::ChangeScene()
         // Initialize main menu actors
         LoadMainMenu();
     }
-    else if (mNextScene == GameScene::Level1)
+    else if (mNextScene == GameScene::CornFieldsMap)
     {
+        mMainHUD = new MainHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
+        mMainHUD->SetLives(5, 5);
+
+        // Seta o próximo nível e cria o portal
+        SetupLevelProgression();
+        StartNextLevel();
 
         // Zera as moedas e o ajusta o tempo (em segundos) entre as ondas
         mLevelTimer = 0;
         mLevelCoins = 0;
-
-        mMainHUD = new MainHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
-        mMainHUD->SetLives(5, 5);
 
         mBuildTowerHUD = new BuildTowerHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
 
@@ -195,28 +198,24 @@ void Game::ChangeScene()
         // Initialize actors
         LoadLevel("../Assets/Levels/level1.csv", LEVEL_WIDTH, LEVEL_HEIGHT);
 
-        // Portal que gera os inimigos
-        auto portal = new EnemyPortal(this, 1, 5, 8.0f, 10.0f);
-        portal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
-
         // Base a ser defendida (o número de vidas deve condizer com o HUD)
         auto base = new Base(this, 5, 200);
         base->SetPosition(Vector2(39 * TILE_SIZE, (12 * TILE_SIZE - TILE_SIZE/2)));
         mCurrentBase = base;
 
     }
-    else if (mNextScene == GameScene::Level2) {
-        // TODO: level 2
+    else if (mNextScene == GameScene::Map2) {
+        // TODO: Map 2
     }else if (mNextScene == GameScene::GameOver) {
         // Set background color
+        mGamePlayState = GamePlayState::GameOver;
+
         mBackgroundColor.Set(166.0f, 176.0f, 79.0f);
 
         LoadGameOverScreen();
-
     }
 
 }
-
 
 //cria uma tela de UI e adicionar os elementos do menu principal.
 void Game::LoadMainMenu()
@@ -225,15 +224,15 @@ void Game::LoadMainMenu()
 
     //mainMenu->AddText("CROP GUARDIAN", Vector2(170.0f, 50.0f), Vector2(300.0f, 30.0f), 48 /*estava 60*/);
 
-
     const Vector2 titleSize = Vector2(mWindowWidth, mWindowHeight);
     const Vector2 titlePos = Vector2(0.0f, 0.0f);
     mainMenu->AddImage("../Assets/Sprites/Logo.png", titlePos, titleSize);
 
     auto button1 = mainMenu->AddButton("START", Vector2(mWindowWidth / 2.0f - 100.0f, 250.0f), Vector2(200.0f, 40.0f), [this]() {
         PlaySound("menu_selected.wav", false);
-        SetGameScene(GameScene::Level1);
+        SetGameScene(GameScene::CornFieldsMap);
     });
+
     auto button2 = mainMenu->AddButton("QUIT", Vector2(mWindowWidth/2.0f - 100.0f, 300.0f), Vector2(200.0f, 40.0f), [this](){
         Quit();
     });
@@ -251,7 +250,6 @@ void Game::LoadGameOverScreen()
     const Vector2 titleSize = Vector2(mWindowWidth, mWindowHeight);
     const Vector2 titlePos = Vector2(0.0f, 0.0f);
     gameOverMenu->AddImage("../Assets/Sprites/GameOver.png", titlePos, titleSize);
-
 
     // Adiciona botão para voltar ao menu
     auto button1 = gameOverMenu->AddButton("MAIN MENU", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
@@ -437,7 +435,7 @@ void Game::ProcessInput()
                     }
 
                     if (mBuildTowerHUD && mBuildTowerHUD->isVisible()) {
-                                mBuildTowerHUD->ProcessMouseClick(mouseX, mouseY);
+                        mBuildTowerHUD->ProcessMouseClick(mouseX, mouseY);
                     }
 
                     if (!mUIStack.empty() && !mMainHUD && !mBuildTowerHUD) {
@@ -615,17 +613,22 @@ void Game::UpdateGame()
     // ---------------------
     // Game Specific Updates
     // ---------------------
-    UpdateCamera();
 
     UpdateSceneManager(deltaTime);
 
-    if (mGameScene != GameScene::MainMenu && mGamePlayState == GamePlayState::WaitingNextWave) {
+    if (mGameScene == GameScene::CornFieldsMap && mGamePlayState == GamePlayState::WaitingNextWave && mMainHUD) {
         UpdateLevelTime(deltaTime);
     }
 
     /*if (mGameScene != GameScene::MainMenu && mMainHUD) {
         UpdateLevelCoins();
     }*/
+
+    if (mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0) {
+        SDL_Log("Nível %d concluído!", mCurrentLevel);
+
+        StartNextLevel();
+    }
 }
 
 void Game::UpdateSceneManager(float deltaTime)
@@ -650,7 +653,6 @@ void Game::UpdateSceneManager(float deltaTime)
     }
 }
 
-
 // Quando estiver esperando por outra onda o timer do level começa a decrescer
 void Game::UpdateLevelTime(float deltaTime)
 {
@@ -658,7 +660,9 @@ void Game::UpdateLevelTime(float deltaTime)
     if (mGameTimer >= 1.0f) {
         mGameTimer = 0;
         mLevelTimer++;
-        mMainHUD->SetTime(mLevelTimer);
+        if (mMainHUD) {
+            mMainHUD->SetTime(mLevelTimer);
+        }
     }
 }
 
@@ -668,21 +672,7 @@ void Game::UpdateLevelCoins() {
     }
 }
 
-void Game::UpdateCamera()
-{
-    /*if (!mMario) return;
-
-    float horizontalCameraPos = mMario->GetPosition().x - (mWindowWidth / 2.0f);
-
-    if (horizontalCameraPos > mCameraPos.x)
-    {
-        // Limit camera to the right side of the level
-        float maxCameraPos = (LEVEL_WIDTH * TILE_SIZE) - mWindowWidth;
-        horizontalCameraPos = Math::Clamp(horizontalCameraPos, 0.0f, maxCameraPos);
-
-        mCameraPos.x = horizontalCameraPos;
-    }*/
-}
+void Game::UpdateCamera() {}
 
 void Game::UpdateActors(float deltaTime)
 {
@@ -690,14 +680,14 @@ void Game::UpdateActors(float deltaTime)
     std::vector<Actor*> actorsOnCamera =
         mSpatialHashing->QueryOnCamera(mCameraPos,mWindowWidth,mWindowHeight);
 
-    bool isMarioOnCamera = false;
-    for (auto actor : actorsOnCamera) //Só está fazendo update dos actors on camera ------------------------------------------------------------------------------------
+    for (auto actor : actorsOnCamera) //Só está fazendo update dos actors on camera
     {
 
         actor->Update(deltaTime);
 
         if (actor->GetState() == ActorState::Destroy)
         {
+            mSpatialHashing->Remove(actor);
             delete actor;
         }
 
@@ -889,7 +879,10 @@ UIFont* Game::LoadFont(const std::string& fileName)
 void Game::UnloadScene()
 {
     // Delete actors
-    delete mSpatialHashing;
+    if (mSpatialHashing) {
+        delete mSpatialHashing;
+        mSpatialHashing = nullptr;
+    }
 
     // Delete UI screens
     for (auto ui : mUIStack) {
@@ -901,6 +894,15 @@ void Game::UnloadScene()
     if (mBackgroundTexture) {
         SDL_DestroyTexture(mBackgroundTexture);
         mBackgroundTexture = nullptr;
+    }
+
+    // Desaloca os dados do nível
+    if (mLevelData) {
+        for (int i = 0; i < LEVEL_HEIGHT; ++i) {
+            delete[] mLevelData[i];
+        }
+        delete[] mLevelData;
+        mLevelData = nullptr;
     }
 }
 
@@ -934,4 +936,56 @@ void Game::PlaySound(const std::string& soundName, bool looping)
     {
         mAudio->PlaySound(soundName, looping);
     }
+}
+
+void Game::SetupLevelProgression() {
+    // Nível 1: 3 waves, 10s de espera
+    mLevelProgression.push_back({3, 7.0f, 5.0f});
+
+    // Nível 2: 5 waves, 8s de espera
+    mLevelProgression.push_back({5, 5.0f, 5.0f});
+
+    // Nível 3: 7 waves, 6s de espera
+    mLevelProgression.push_back({7, 3.0f, 3.0f});
+}
+
+void Game::StartNextLevel() {
+    mCurrentLevel++;
+
+    if (mCurrentLevel > mLevelProgression.size()) {
+        SDL_Log("VOCÊ VENCEU!");
+        // SetGameScene(Game::GameScene::Victory, 2.0f); // Exemplo de tela de vitória
+        return;
+    }
+
+    const LevelDefinition& currentDef = mLevelProgression[mCurrentLevel - 1];
+
+    // Cria um novo portal para o nível
+    // Remove o portal antigo se ele existir
+    if (mCurrentPortal) {
+        mCurrentPortal->SetState(ActorState::Destroy);
+    }
+    mCurrentPortal = new EnemyPortal(this, currentDef.numberOfWaves, currentDef.timeBetweenWaves, currentDef.initialDelay);
+    mCurrentPortal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
+
+    // Atualiza o HUD
+    mMainHUD->SetLevel(mCurrentLevel);
+}
+
+int Game::GetEnemiesPerWaveForCurrentLevel() const
+{
+    // Adiciona 2 inimigos na wave a cada fase
+    return 3 + (mCurrentLevel - 1) * 2;
+}
+
+float Game::GetEnemySpawnIntervalForCurrentLevel() const
+{
+    // O intervalo de spawn diminui em 0.2s, com um mínimo de 0.5s
+    return std::max(0.5f, 2.0f - (mCurrentLevel - 1) * 0.2f);
+}
+
+float Game::GetBeeSpawnChanceForCurrentLevel() const
+{
+    // A chance de uma abelha aparecer aumenta 10% a cada fase, com um máximo de 60%. Inicia em 30%
+    return std::min(0.6f, 0.20f + (mCurrentLevel - 1) * 0.10f);
 }

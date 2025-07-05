@@ -3,7 +3,7 @@
 //
 
 #include "SpatialHashing.h"
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <bits/stdc++.h>
 
 SpatialHashing::SpatialHashing(int cellSize, int width, int height)

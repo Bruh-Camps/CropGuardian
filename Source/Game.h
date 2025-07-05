@@ -7,7 +7,7 @@
 // ----------------------------------------------------------------
 
 #pragma once
-#include <SDL2/SDL.h>
+#include <SDL.h>
 #include <vector>
 #include <unordered_map>
 #include "AudioSystem.h"
@@ -33,12 +33,11 @@ public:
     static const int BUILD_SPOT_W  = 2 * TILE_SIZE;
     static const int BUILD_SPOT_H  = 2 * TILE_SIZE;
 
-
     enum class GameScene
     {
         MainMenu,
-        Level1,
-        Level2,
+        CornFieldsMap,
+        Map2,
         GameOver
     };
 
@@ -58,6 +57,12 @@ public:
         GameOver,
         LevelComplete,
         Leaving
+    };
+
+    struct LevelDefinition {
+        int numberOfWaves;
+        float timeBetweenWaves;
+        float initialDelay;
     };
 
     Game(int windowWidth, int windowHeight);
@@ -125,6 +130,16 @@ public:
 
     void PlaySound(const std::string& soundName, bool looping = false);
 
+    void AdvanceToNextLevel();
+    int GetCurrentLevel() const { return mCurrentLevel; }
+
+    int GetEnemiesPerWaveForCurrentLevel() const;
+    float GetEnemySpawnIntervalForCurrentLevel() const;
+    float GetBeeSpawnChanceForCurrentLevel() const;
+
+    void IncrementEnemyCount() { mEnemyCount++; }
+    void DecrementEnemyCount() { mEnemyCount--; }
+
 private:
     void ProcessInput();
     void UpdateGame();
@@ -190,6 +205,15 @@ private:
     float mGameTimer;
     int mLevelTimer;
     int mLevelCoins;
+
+    int mCurrentLevel = 0;
+    std::vector<LevelDefinition> mLevelProgression;
+
+    int mEnemyCount = 0;
+    class EnemyPortal* mCurrentPortal = nullptr;
+
+    void SetupLevelProgression();
+    void StartNextLevel();
 
     SDL_Texture *mBackgroundTexture;
     Vector2 mBackgroundSize;

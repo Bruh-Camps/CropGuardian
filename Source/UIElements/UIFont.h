@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <unordered_map>
-#include <SDL2/SDL_ttf.h>
+#include <SDL_ttf.h>
 #include "../Math.h"
 
 class UIFont
