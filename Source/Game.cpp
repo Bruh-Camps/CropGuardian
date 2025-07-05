@@ -208,6 +208,8 @@ void Game::ChangeScene()
         // TODO: Map 2
     }else if (mNextScene == GameScene::GameOver) {
         // Set background color
+        mGamePlayState = GamePlayState::GameOver;
+
         mBackgroundColor.Set(166.0f, 176.0f, 79.0f);
 
         LoadGameOverScreen();
@@ -433,7 +435,7 @@ void Game::ProcessInput()
                     }
 
                     if (mBuildTowerHUD && mBuildTowerHUD->isVisible()) {
-                                mBuildTowerHUD->ProcessMouseClick(mouseX, mouseY);
+                        mBuildTowerHUD->ProcessMouseClick(mouseX, mouseY);
                     }
 
                     if (!mUIStack.empty() && !mMainHUD && !mBuildTowerHUD) {
@@ -611,11 +613,10 @@ void Game::UpdateGame()
     // ---------------------
     // Game Specific Updates
     // ---------------------
-    UpdateCamera();
 
     UpdateSceneManager(deltaTime);
 
-    if (mGameScene != GameScene::MainMenu && mGamePlayState == GamePlayState::WaitingNextWave) {
+    if (mGameScene == GameScene::CornFieldsMap && mGamePlayState == GamePlayState::WaitingNextWave && mMainHUD) {
         UpdateLevelTime(deltaTime);
     }
 
@@ -652,7 +653,6 @@ void Game::UpdateSceneManager(float deltaTime)
     }
 }
 
-
 // Quando estiver esperando por outra onda o timer do level começa a decrescer
 void Game::UpdateLevelTime(float deltaTime)
 {
@@ -660,7 +660,9 @@ void Game::UpdateLevelTime(float deltaTime)
     if (mGameTimer >= 1.0f) {
         mGameTimer = 0;
         mLevelTimer++;
-        mMainHUD->SetTime(mLevelTimer);
+        if (mMainHUD) {
+            mMainHUD->SetTime(mLevelTimer);
+        }
     }
 }
 
@@ -670,21 +672,7 @@ void Game::UpdateLevelCoins() {
     }
 }
 
-void Game::UpdateCamera()
-{
-    /*if (!mMario) return;
-
-    float horizontalCameraPos = mMario->GetPosition().x - (mWindowWidth / 2.0f);
-
-    if (horizontalCameraPos > mCameraPos.x)
-    {
-        // Limit camera to the right side of the level
-        float maxCameraPos = (LEVEL_WIDTH * TILE_SIZE) - mWindowWidth;
-        horizontalCameraPos = Math::Clamp(horizontalCameraPos, 0.0f, maxCameraPos);
-
-        mCameraPos.x = horizontalCameraPos;
-    }*/
-}
+void Game::UpdateCamera() {}
 
 void Game::UpdateActors(float deltaTime)
 {
@@ -692,14 +680,14 @@ void Game::UpdateActors(float deltaTime)
     std::vector<Actor*> actorsOnCamera =
         mSpatialHashing->QueryOnCamera(mCameraPos,mWindowWidth,mWindowHeight);
 
-    bool isMarioOnCamera = false;
-    for (auto actor : actorsOnCamera) //Só está fazendo update dos actors on camera ------------------------------------------------------------------------------------
+    for (auto actor : actorsOnCamera) //Só está fazendo update dos actors on camera
     {
 
         actor->Update(deltaTime);
 
         if (actor->GetState() == ActorState::Destroy)
         {
+            mSpatialHashing->Remove(actor);
             delete actor;
         }
 
@@ -891,7 +879,10 @@ UIFont* Game::LoadFont(const std::string& fileName)
 void Game::UnloadScene()
 {
     // Delete actors
-    delete mSpatialHashing;
+    if (mSpatialHashing) {
+        delete mSpatialHashing;
+        mSpatialHashing = nullptr;
+    }
 
     // Delete UI screens
     for (auto ui : mUIStack) {
@@ -903,6 +894,15 @@ void Game::UnloadScene()
     if (mBackgroundTexture) {
         SDL_DestroyTexture(mBackgroundTexture);
         mBackgroundTexture = nullptr;
+    }
+
+    // Desaloca os dados do nível
+    if (mLevelData) {
+        for (int i = 0; i < LEVEL_HEIGHT; ++i) {
+            delete[] mLevelData[i];
+        }
+        delete[] mLevelData;
+        mLevelData = nullptr;
     }
 }
 
@@ -950,8 +950,6 @@ void Game::SetupLevelProgression() {
 }
 
 void Game::StartNextLevel() {
-    SDL_Log("StartNextLevel");
-
     mCurrentLevel++;
 
     if (mCurrentLevel > mLevelProgression.size()) {
