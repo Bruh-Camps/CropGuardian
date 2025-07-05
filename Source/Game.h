@@ -36,8 +36,8 @@ public:
     enum class GameScene
     {
         MainMenu,
-        Level1,
-        Level2,
+        CornFieldsMap,
+        Map2,
         GameOver
     };
 
@@ -57,6 +57,12 @@ public:
         GameOver,
         LevelComplete,
         Leaving
+    };
+
+    struct LevelDefinition {
+        int numberOfWaves;
+        float timeBetweenWaves;
+        float initialDelay;
     };
 
     Game(int windowWidth, int windowHeight);
@@ -131,6 +137,9 @@ public:
     float GetEnemySpawnIntervalForCurrentLevel() const;
     float GetBeeSpawnChanceForCurrentLevel() const;
 
+    void IncrementEnemyCount() { mEnemyCount++; }
+    void DecrementEnemyCount() { mEnemyCount--; }
+
 private:
     void ProcessInput();
     void UpdateGame();
@@ -196,7 +205,15 @@ private:
     float mGameTimer;
     int mLevelTimer;
     int mLevelCoins;
-    int mCurrentLevel;
+
+    int mCurrentLevel = 0;
+    std::vector<LevelDefinition> mLevelProgression;
+
+    int mEnemyCount = 0;
+    class EnemyPortal* mCurrentPortal = nullptr;
+
+    void SetupLevelProgression();
+    void StartNextLevel();
 
     SDL_Texture *mBackgroundTexture;
     Vector2 mBackgroundSize;

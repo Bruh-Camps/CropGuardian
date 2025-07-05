@@ -27,12 +27,12 @@ MainHUD::MainHUD(class Game *game, const std::string &fontName, SDL_Renderer *re
     // === POSICIONAMENTO DO BANNER E TEXTO DO NOME DA FASE ===
     Vector2 bannerSize(bannerWidth, bannerHeight);
     Vector2 bannerPos((windowWidth - bannerWidth) / 2.0f, margin);
-    Vector2 levelTextSize(250.0f, textHeight);
-    Vector2 levelTextPos(bannerPos.x + 20.0f, bannerPos.y + (bannerHeight - textHeight) / 2.0f);
+    Vector2 mapTextSize(250.0f, textHeight);
+    Vector2 mapTextPos(bannerPos.x + 20.0f, bannerPos.y + (bannerHeight - textHeight) / 2.0f);
 
-    mLevelNameText = AddText("  Corn fields", levelTextPos, levelTextSize, pointSize);
-    mLevelNameText->SetColor(Vector3(0, 0, 0));
-    mLevelNameText->SetText("  Corn fields");
+    mMapNameText = AddText("  Corn fields", mapTextPos, mapTextSize, pointSize);
+    mMapNameText->SetColor(Vector3(0, 0, 0));
+    mMapNameText->SetText("  Corn fields");
     mBannerImage = AddImage("../Assets/Sprites/HUD/banner.png", bannerPos, bannerSize);
 
     float alignedY = bannerPos.y + (bannerHeight - iconSize) / 2.0f;
@@ -91,12 +91,28 @@ MainHUD::MainHUD(class Game *game, const std::string &fontName, SDL_Renderer *re
     float livesAlignedY = mPauseButton->GetPosition().y + (mPauseButton->GetSize().y - livesIconSize) / 2.0f;
     float currentLivesX = mPauseButton->GetPosition().x + mPauseButton->GetSize().x + spacing;
 
+    // LEVEL
+    std::string levelStr = "Level " + std::to_string(mLevel);
+    float levelPointSize = POINT_SIZE;
+    float levelTextHeight = TEXT_HEIGHT;
+    float levelTextWidth = levelStr.length() * (levelPointSize * 0.6f);
+
+    Vector2 levelTextSize(levelTextWidth, levelTextHeight);
+    Vector2 levelTextPos((windowWidth - levelTextWidth) / 2.0f, windowHeight - levelTextHeight - 10.0f);
+
+    mLevelText = AddText(levelStr, levelTextPos, levelTextSize, levelPointSize);
+    mLevelText->SetColor(Vector3(255, 255, 255));
 }
 
 MainHUD::~MainHUD() {}
 
-void MainHUD::SetLevelName(const std::string& name) {
-    mLevelNameText->SetText(name);
+void MainHUD::SetMapName(const std::string& name) {
+    mMapNameText->SetText(name);
+}
+
+void MainHUD::SetLevel(int level) {
+    mLevel = level;
+    mLevelText->SetText("Level " + std::to_string(mLevel));
 }
 
 void MainHUD::SetCoinCount(int count) {

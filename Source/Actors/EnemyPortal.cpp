@@ -51,9 +51,8 @@ void EnemyPortal::OnUpdate(float deltaTime) {
 
     if (mCurrentWave > mNumWaves)
     {
-        //SDL_Log("Todas as ondas de inimigos foram criadas!");
-        //this->SetState(ActorState::Paused); // Faz com que o portal deixe de ser atualizado
-        //mState = ActorState::Destroy;
+        mAllWavesFinished = true;
+        SetState(ActorState::Paused);
         return;
     }
 

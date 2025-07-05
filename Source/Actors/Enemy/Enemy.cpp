@@ -24,6 +24,8 @@ Enemy::Enemy(Game* game, float forwardSpeed, float deathTime, float life, int co
     mDrawComponent = new DrawAnimatedComponent(this, spriteSheet, spriteJson);
 
     // mColliderComponent = new AABBColliderComponent(this, 0, 0, Game::TILE_SIZE, Game::TILE_SIZE, ColliderLayer::Enemy);
+
+    mGame->IncrementEnemyCount();
 }
 
 void Enemy::OnUpdate(float deltaTime)
@@ -67,6 +69,9 @@ void Enemy::TakeDamage(float damage)
 
 void Enemy::Kill()
 {
+    if (!mIsDying) {
+        mGame->DecrementEnemyCount();
+    }
     mIsDying = true;
     mDrawComponent->SetAnimation("dead");
     mRigidBodyComponent->SetEnabled(false);

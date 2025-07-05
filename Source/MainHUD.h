@@ -16,7 +16,8 @@ public:
 
     ~MainHUD();
 
-    void SetLevelName(const std::string& name);
+    void SetMapName(const std::string& name);
+    void SetLevel(int level);
     void SetCoinCount(int count);
     void SetTime(float time);
     void SetWaveCount(int currentWave, int totalWaves);
@@ -24,8 +25,11 @@ public:
     void SetLives(int currentLives, int maxLives = -1);
 
 private:
-  	UIText* mLevelNameText;
+  	UIText* mMapNameText;
     UIImage* mBannerImage;
+    UIText* mLevelText;
+
+    int mLevel;
 
     UIImageButton* mPauseButton;
 

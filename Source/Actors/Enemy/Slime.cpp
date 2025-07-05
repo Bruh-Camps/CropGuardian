@@ -6,7 +6,7 @@
 #include "../../Components/RigidBodyComponent.h"
 
 Slime::Slime(Game* game, float forwardSpeed, float deathTime, float life)
-    : Enemy(game, forwardSpeed, deathTime, life, 7,
+    : Enemy(game, forwardSpeed, deathTime, life, 50,
             "../Assets/Sprites/Slime/slime.png",
             "../Assets/Sprites/Slime/slime.json")
 {

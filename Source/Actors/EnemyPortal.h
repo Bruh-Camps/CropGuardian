@@ -8,6 +8,8 @@ public:
     explicit EnemyPortal(Game* game, int numWaves, float timeBetweenWaves, float initialDelay);
 
     void OnUpdate(float deltaTime) override;
+
+    bool AreAllWavesFinished() const { return mAllWavesFinished; }
 private:
     class DrawSpriteComponent* mSprite;
     class DrawAnimatedComponent* mDrawComponent;
@@ -25,6 +27,8 @@ private:
     int mEnemiesSpawnedThisWave = 0;
     bool mInWave = true;                // indica se está dentro de uma wave ou esperando
     bool mStarted = false;
+
+    bool mAllWavesFinished = false;
 
     void SetupWaveParameters();
 };

@@ -127,7 +127,7 @@ bool Game::Initialize()
 void Game::SetGameScene(Game::GameScene scene, float transitionTime)
 {
     if (mSceneManagerState == SceneManagerState::None) {
-        if (scene == GameScene::MainMenu || scene == GameScene::Level1 || scene == GameScene::Level2 || scene == GameScene::GameOver) {
+        if (scene == GameScene::MainMenu || scene == GameScene::CornFieldsMap || scene == GameScene::Map2 || scene == GameScene::GameOver) {
             mNextScene = scene;
             mSceneManagerState = SceneManagerState::Entering;
             mSceneManagerTimer = transitionTime;
@@ -175,16 +175,18 @@ void Game::ChangeScene()
         // Initialize main menu actors
         LoadMainMenu();
     }
-    else if (mNextScene == GameScene::Level1)
+    else if (mNextScene == GameScene::CornFieldsMap)
     {
-        mCurrentLevel = 1;
+        mMainHUD = new MainHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
+        mMainHUD->SetLives(5, 5);
+
+        // Seta o próximo nível e cria o portal
+        SetupLevelProgression();
+        StartNextLevel();
 
         // Zera as moedas e o ajusta o tempo (em segundos) entre as ondas
         mLevelTimer = 0;
         mLevelCoins = 0;
-
-        mMainHUD = new MainHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
-        mMainHUD->SetLives(5, 5);
 
         mBuildTowerHUD = new BuildTowerHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
 
@@ -196,28 +198,22 @@ void Game::ChangeScene()
         // Initialize actors
         LoadLevel("../Assets/Levels/level1.csv", LEVEL_WIDTH, LEVEL_HEIGHT);
 
-        // Portal que gera os inimigos
-        auto portal = new EnemyPortal(this, 3, 8.0f, 10.0f);
-        portal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
-
         // Base a ser defendida (o número de vidas deve condizer com o HUD)
         auto base = new Base(this, 5, 200);
         base->SetPosition(Vector2(39 * TILE_SIZE, (12 * TILE_SIZE - TILE_SIZE/2)));
         mCurrentBase = base;
 
     }
-    else if (mNextScene == GameScene::Level2) {
-        // TODO: level 2
+    else if (mNextScene == GameScene::Map2) {
+        // TODO: Map 2
     }else if (mNextScene == GameScene::GameOver) {
         // Set background color
         mBackgroundColor.Set(166.0f, 176.0f, 79.0f);
 
         LoadGameOverScreen();
-
     }
 
 }
-
 
 //cria uma tela de UI e adicionar os elementos do menu principal.
 void Game::LoadMainMenu()
@@ -226,15 +222,15 @@ void Game::LoadMainMenu()
 
     //mainMenu->AddText("CROP GUARDIAN", Vector2(170.0f, 50.0f), Vector2(300.0f, 30.0f), 48 /*estava 60*/);
 
-
     const Vector2 titleSize = Vector2(mWindowWidth, mWindowHeight);
     const Vector2 titlePos = Vector2(0.0f, 0.0f);
     mainMenu->AddImage("../Assets/Sprites/Logo.png", titlePos, titleSize);
 
     auto button1 = mainMenu->AddButton("START", Vector2(mWindowWidth / 2.0f - 100.0f, 250.0f), Vector2(200.0f, 40.0f), [this]() {
         PlaySound("menu_selected.wav", false);
-        SetGameScene(GameScene::Level1);
+        SetGameScene(GameScene::CornFieldsMap);
     });
+
     auto button2 = mainMenu->AddButton("QUIT", Vector2(mWindowWidth/2.0f - 100.0f, 300.0f), Vector2(200.0f, 40.0f), [this](){
         Quit();
     });
@@ -252,7 +248,6 @@ void Game::LoadGameOverScreen()
     const Vector2 titleSize = Vector2(mWindowWidth, mWindowHeight);
     const Vector2 titlePos = Vector2(0.0f, 0.0f);
     gameOverMenu->AddImage("../Assets/Sprites/GameOver.png", titlePos, titleSize);
-
 
     // Adiciona botão para voltar ao menu
     auto button1 = gameOverMenu->AddButton("MAIN MENU", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
@@ -627,6 +622,12 @@ void Game::UpdateGame()
     /*if (mGameScene != GameScene::MainMenu && mMainHUD) {
         UpdateLevelCoins();
     }*/
+
+    if (mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0) {
+        SDL_Log("Nível %d concluído!", mCurrentLevel);
+
+        StartNextLevel();
+    }
 }
 
 void Game::UpdateSceneManager(float deltaTime)
@@ -937,9 +938,40 @@ void Game::PlaySound(const std::string& soundName, bool looping)
     }
 }
 
-void Game::AdvanceToNextLevel()
-{
+void Game::SetupLevelProgression() {
+    // Nível 1: 3 waves, 10s de espera
+    mLevelProgression.push_back({3, 10.0f, 5.0f});
+
+    // Nível 2: 5 waves, 8s de espera
+    mLevelProgression.push_back({5, 8.0f, 5.0f});
+
+    // Nível 3: 7 waves, 6s de espera
+    mLevelProgression.push_back({7, 6.0f, 3.0f});
+}
+
+void Game::StartNextLevel() {
+    SDL_Log("StartNextLevel");
+
     mCurrentLevel++;
+
+    if (mCurrentLevel > mLevelProgression.size()) {
+        SDL_Log("VOCÊ VENCEU!");
+        // SetGameScene(Game::GameScene::Victory, 2.0f); // Exemplo de tela de vitória
+        return;
+    }
+
+    const LevelDefinition& currentDef = mLevelProgression[mCurrentLevel - 1];
+
+    // Cria um novo portal para o nível
+    // Remove o portal antigo se ele existir
+    if (mCurrentPortal) {
+        mCurrentPortal->SetState(ActorState::Destroy);
+    }
+    mCurrentPortal = new EnemyPortal(this, currentDef.numberOfWaves, currentDef.timeBetweenWaves, currentDef.initialDelay);
+    mCurrentPortal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
+
+    // Atualiza o HUD
+    mMainHUD->SetLevel(mCurrentLevel);
 }
 
 int Game::GetEnemiesPerWaveForCurrentLevel() const
