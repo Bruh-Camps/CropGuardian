@@ -29,15 +29,19 @@ void Bee::UpdateMovement(float deltaTime)
     {
         case MovementDirection::Right:
             mRigidBodyComponent->SetVelocity(Vector2::UnitX * mForwardSpeed);
+            SetRotation(270.0f);
             break;
         case MovementDirection::Left:
             mRigidBodyComponent->SetVelocity(Vector2::NegUnitX * mForwardSpeed);
+            SetRotation(90.0f);
             break;
         case MovementDirection::Up:
             mRigidBodyComponent->SetVelocity(Vector2::NegUnitY * mForwardSpeed);
+            SetRotation(180.0f);
             break;
         case MovementDirection::Down:
             mRigidBodyComponent->SetVelocity(Vector2::UnitY * mForwardSpeed);
+            SetRotation(0.0f);
             break;
     }
 }

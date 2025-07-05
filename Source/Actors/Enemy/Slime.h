@@ -10,7 +10,7 @@
 class Slime : public Enemy
 {
 public:
-    explicit Slime(class Game* game, float forwardSpeed = 100.0f, float deathTime = 0.5f, float life = 100.0f);
+    explicit Slime(class Game* game, float forwardSpeed = 50.0f, float deathTime = 0.5f, float life = 100.0f);
 
 private:
     void UpdateMovement(float deltaTime) override;

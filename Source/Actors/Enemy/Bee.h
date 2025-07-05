@@ -9,7 +9,7 @@
 class Bee : public Enemy
 {
 public:
-    explicit Bee(class Game* game, float forwardSpeed = 120.0f, float deathTime = 0.4f, float life = 50.0f);
+    explicit Bee(class Game* game, float forwardSpeed = 100.0f, float deathTime = 0.4f, float life = 50.0f);
 
 private:
     void UpdateMovement(float deltaTime) override;

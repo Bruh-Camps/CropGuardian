@@ -67,8 +67,12 @@ add_executable(${PROJECT_NAME}
         Source/UIElements/UIImage.h
         Source/SpatialHashing.cpp
         Source/SpatialHashing.h
-        Source/Actors/Slime.cpp
-        Source/Actors/Slime.h
+        Source/Actors/Enemy/Slime.cpp
+        Source/Actors/Enemy/Slime.h
+        Source/Actors/Enemy/Bee.cpp
+        Source/Actors/Enemy/Bee.h
+        Source/Actors/Enemy/Enemy.cpp
+        Source/Actors/Enemy/Enemy.h
         Source/Actors/BuildSpot.cpp
         Source/Actors/BuildSpot.h
         Source/Actors/EnemyPortal.h
