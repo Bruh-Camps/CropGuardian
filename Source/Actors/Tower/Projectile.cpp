@@ -2,26 +2,37 @@
 // Created by Lucas N. Ferreira on 12/09/23.
 //
 
-#include "NormalArrow.h"
+#include "Projectile.h"
 #include "../Enemy/Enemy.h"
 #include "../../Game.h"
 #include "../../Components/RigidBodyComponent.h"
 #include "../../Components/DrawComponents/DrawSpriteComponent.h"
 
-NormalArrow::NormalArrow(Game* game, Actor* target, float force, float damage, const float deathTimer)
+Projectile::Projectile(Game* game, Actor* target, ProjectileType type, float force, float damage, const float deathTimer)
         :Actor(game)
+        ,mType(type)
         ,mMoveForce(force)
         ,mDamage(damage)
         ,mDeathTimer(deathTimer)
         ,mCurrentTarget(target)
 {
 
-    mSprite = new DrawSpriteComponent(
+    if (mType == ProjectileType::Nornal) {
+        mSprite = new DrawSpriteComponent(
         this,
-        "../Assets/Sprites/Tower/arrow.png",
+        "../Assets/Sprites/NormalTower/arrow.png",
         3,
         14,
         20);
+    } else if (mType == ProjectileType::Ice) {
+        mSprite = new DrawSpriteComponent(
+        this,
+        "../Assets/Sprites/IceTower/ice_shot.png",
+        20,
+        20,
+        20);
+    }
+
 
 
     mRigidBodyComponent = new RigidBodyComponent(this, 1);
@@ -36,7 +47,7 @@ NormalArrow::NormalArrow(Game* game, Actor* target, float force, float damage, c
 
 }
 
-void NormalArrow::OnUpdate(float deltaTime)
+void Projectile::OnUpdate(float deltaTime)
 {
     mDeathTimer -= deltaTime;
     if (mDeathTimer <= 0.0f || !mCurrentTarget || mCurrentTarget->GetState() == ActorState::Destroy) {
@@ -62,6 +73,7 @@ void NormalArrow::OnUpdate(float deltaTime)
     if (distance < 10.0f) {
         if (auto enemy = dynamic_cast<Enemy*>(mCurrentTarget)) {
             enemy->TakeDamage(mDamage);
+            if (mType==ProjectileType::Ice) enemy->SlowDown(0.6f, 3.0f);  // Reduz velocidade para 60% por 3 segundos
         }
         SetState(ActorState::Destroy);
     }

@@ -41,7 +41,7 @@ private:
     float mBuildSpotH;
 
     State mState;
-    class NormalTower* mTower;
+    class Tower* mTower;
     class DrawSpriteComponent* mSprite;
     bool mIsHovered = false;
 };

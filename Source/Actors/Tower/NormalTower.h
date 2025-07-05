@@ -1,20 +1,17 @@
 #pragma once
 
+#include "Tower.h"
 #include "../Actor.h"
-#include "../Enemy/Enemy.h"
 
-class NormalTower : public Actor{
-    public:
-        explicit NormalTower(Game* game);
-        void OnUpdate(float deltaTime) override;
+class NormalTower : public Tower {
+public:
+    explicit NormalTower(Game *game);
 
-    private:
-        class DrawAnimatedComponent* mDrawComponent;
-        float mDamage;
-        float mCooldown;
-        float mCurrentCooldown;
-        float mRange;
-        float mProjectileMoveForce;
-        float mProjectileDamage;
-        Enemy* mCurrentTarget;
+
+private:
+    float mProjectileMoveForce;
+    float mProjectileDamage;
+    void ShotProjectile(Vector2 initialPosition, float initialAngle, Enemy *currentTarget) override;
+
+
 };

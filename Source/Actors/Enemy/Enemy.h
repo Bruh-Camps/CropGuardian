@@ -26,6 +26,7 @@ public:
     void TakeDamage(float damage);
     void Kill() override;
     void DrawLifeBar(SDL_Renderer* renderer) override;
+    void SlowDown(float percentage, float duration);
 
     bool IsHealthBarVisible() const { return mHealthBarVisibleTimer > 0.0f; }
     float GetCurrentLife() const { return mCurrentLife; }
@@ -50,6 +51,12 @@ protected:
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawAnimatedComponent* mDrawComponent;
     class AABBColliderComponent* mColliderComponent;
+
+    // Para os efeitos de gelo
+    float mOriginalSpeed;         // Armazena a velocidade original
+    float mSlowdownTimer;         // Contador para o efeito de lentidão
+    bool mIsSlowed;               // Indica se está sob efeito
+
 
     const float kHealthBarDisplayTime = 2.0f;
 };

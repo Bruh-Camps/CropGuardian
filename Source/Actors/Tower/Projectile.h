@@ -5,10 +5,16 @@
 #pragma once
 #include "../Actor.h"
 
-class NormalArrow : public Actor
+class Projectile : public Actor
 {
 public:
-    NormalArrow(class Game* game, Actor* target, float force = 300.0f, float damage = 10.0f, float deathTimer = 1.0f);
+    enum class ProjectileType
+    {
+        Nornal,
+        Ice
+    };
+
+    Projectile(class Game* game, Actor* target, ProjectileType type, float force = 300.0f, float damage = 10.0f, float deathTimer = 1.0f);
 
     void OnUpdate(float deltaTime) override;
 
@@ -16,6 +22,7 @@ private:
     float mMoveForce;
     float mDamage;
     float mDeathTimer;
+    ProjectileType mType;
 
     class RigidBodyComponent* mRigidBodyComponent;
     class DrawSpriteComponent* mSprite;

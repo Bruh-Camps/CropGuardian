@@ -34,7 +34,7 @@ BuildTowerHUD::BuildTowerHUD(class Game* game, const std::string& fontName, SDL_
     float buttonY = panelPos.y + (panelHeight - buttonSize) / 2.0f;
 
     mTower1 = AddImageButton(
-        "../Assets/Sprites/HUD/sample_tower_banner.png",
+        "../Assets/Sprites/HUD/normal_tower_banner.png",
         Vector2(startX, buttonY),
         Vector2(buttonSize, buttonSize),
         [this]() {
@@ -50,14 +50,16 @@ BuildTowerHUD::BuildTowerHUD(class Game* game, const std::string& fontName, SDL_
 
     startX += buttonSize + spacing;
     mTower2 = AddImageButton(
-        "../Assets/Sprites/HUD/empty_tower_banner.png",
+        "../Assets/Sprites/HUD/ice_tower_banner.png",
         Vector2(startX, buttonY),
         Vector2(buttonSize, buttonSize),
         [this]() {
             if (mActiveBuildSpot)
             {
-                //mActiveBuildSpot->BuildTower(/* TowerType::Magic*/);
-                Hide();
+                if (mGame->GetCurrentBase()->GetCoins()>=100) {
+                    mActiveBuildSpot->BuildTower(BuildSpot::TowerType::Ice);
+                    Hide();
+                }
             }
         });
 

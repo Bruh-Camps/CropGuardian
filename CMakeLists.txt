@@ -81,8 +81,12 @@ add_executable(${PROJECT_NAME}
         Source/Actors/Base.h
         Source/Actors/Tower/NormalTower.cpp
         Source/Actors/Tower/NormalTower.h
-        Source/Actors/Tower/NormalArrow.cpp
-        Source/Actors/Tower/NormalArrow.h
+        Source/Actors/Tower/Projectile.cpp
+        Source/Actors/Tower/Projectile.h
+        Source/Actors/Tower/IceTower.cpp
+        Source/Actors/Tower/IceTower.h
+        Source/Actors/Tower/Tower.cpp
+        Source/Actors/Tower/Tower.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})

@@ -8,6 +8,7 @@
 #include "../Components/DrawComponents/DrawSpriteComponent.h"
 #include "../../Source/BuildTowerHUD.h"
 #include "../Game.h"
+#include "Tower/IceTower.h"
 
 BuildSpot::BuildSpot(Game* game, Vector2 dims)
 : Actor(game)
@@ -20,7 +21,7 @@ BuildSpot::BuildSpot(Game* game, Vector2 dims)
 
     mSprite = new DrawSpriteComponent(
         this,
-        "../Assets/Sprites/Tower/build_spot.png",
+        "../Assets/Sprites/NormalTower/build_spot.png",
         mBuildSpotW,
         mBuildSpotH,
         20);
@@ -67,6 +68,10 @@ void BuildSpot::OnHoverExit()
 void BuildSpot::BuildTower(TowerType type) {
     if (type == TowerType::Normal) {
         mTower = new NormalTower(mGame);
+        mTower->SetPosition(mPosition - Vector2(0, 64));
+        this->SetState(ActorState::Destroy);
+    } else if (type == TowerType::Ice) {
+        mTower = new IceTower(mGame);
         mTower->SetPosition(mPosition - Vector2(0, 64));
         this->SetState(ActorState::Destroy);
     } else {
