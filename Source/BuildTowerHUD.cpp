@@ -5,7 +5,7 @@
 #include "BuildTowerHUD.h"
 #include "Game.h"
 #include "Actors/BuildSpot.h"
-#include "Actors/NormalTower.h"
+#include "Actors/Tower/NormalTower.h"
 #include "UIElements/UIImage.h"
 #include "UIElements/UIImageButton.h"
 

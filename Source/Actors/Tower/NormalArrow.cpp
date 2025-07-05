@@ -3,10 +3,10 @@
 //
 
 #include "NormalArrow.h"
-#include "Enemy/Enemy.h"
-#include "../Game.h"
-#include "../Components/RigidBodyComponent.h"
-#include "../Components/DrawComponents/DrawSpriteComponent.h"
+#include "../Enemy/Enemy.h"
+#include "../../Game.h"
+#include "../../Components/RigidBodyComponent.h"
+#include "../../Components/DrawComponents/DrawSpriteComponent.h"
 
 NormalArrow::NormalArrow(Game* game, Actor* target, float force, float damage, const float deathTimer)
         :Actor(game)

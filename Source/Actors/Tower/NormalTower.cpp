@@ -1,10 +1,10 @@
 #include "NormalTower.h"
 
-#include "Enemy/Slime.h"
-#include "../Game.h"
-#include "../MainHUD.h"
-#include "../Actors/NormalArrow.h"
-#include "../Components/DrawComponents/DrawAnimatedComponent.h"
+#include "../Enemy/Slime.h"
+#include "../../Game.h"
+#include "../../MainHUD.h"
+#include "NormalArrow.h"
+#include "../../Components/DrawComponents/DrawAnimatedComponent.h"
 
 NormalTower::NormalTower(Game *game)
     : Actor(game)

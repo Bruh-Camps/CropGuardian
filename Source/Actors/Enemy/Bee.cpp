@@ -14,7 +14,7 @@ Bee::Bee(Game* game, float forwardSpeed, float deathTime, float life)
     , mOscillationFrequency(10.0f)
     , mOscillationAmplitude(15.0f)
 {
-    mDrawComponent->AddAnimation("dead", {1, 2, 3, 4, 5});
+    mDrawComponent->AddAnimation("dead", {1, 2, 3, 4});
     mDrawComponent->AddAnimation("fly", {6, 7, 8, 9, 10, 11});
 
     mDrawComponent->SetAnimation("fly");

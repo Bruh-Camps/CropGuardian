@@ -52,7 +52,8 @@ void EnemyPortal::OnUpdate(float deltaTime) {
     if (mCurrentWave > mNumWaves)
     {
         mAllWavesFinished = true;
-        SetState(ActorState::Paused);
+        //SetState(ActorState::Paused);
+        // TODO: PAusar o jogo e mostrar mensagem na tela informando que uma nova orda mais rápida se aproxima
         return;
     }
 

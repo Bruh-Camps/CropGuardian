@@ -79,10 +79,10 @@ add_executable(${PROJECT_NAME}
         Source/Actors/EnemyPortal.cpp
         Source/Actors/Base.cpp
         Source/Actors/Base.h
-        Source/Actors/NormalTower.cpp
-        Source/Actors/NormalTower.h
-        Source/Actors/NormalArrow.cpp
-        Source/Actors/NormalArrow.h
+        Source/Actors/Tower/NormalTower.cpp
+        Source/Actors/Tower/NormalTower.h
+        Source/Actors/Tower/NormalArrow.cpp
+        Source/Actors/Tower/NormalArrow.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})

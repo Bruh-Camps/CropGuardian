@@ -1,7 +1,7 @@
 #pragma once
 
-#include "Actor.h"
-#include "Enemy/Enemy.h"
+#include "../Actor.h"
+#include "../Enemy/Enemy.h"
 
 class NormalTower : public Actor{
     public:

@@ -4,7 +4,7 @@
 
 #pragma once
 #include "Actor.h"
-#include "NormalTower.h"
+#include "Tower/NormalTower.h"
 
 constexpr float HOVER_SCALE = 1.12f;
 

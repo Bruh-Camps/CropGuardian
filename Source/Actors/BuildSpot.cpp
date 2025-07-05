@@ -4,7 +4,7 @@
 
 #include "BuildSpot.h"
 
-#include "NormalTower.h"
+#include "Tower/NormalTower.h"
 #include "../Components/DrawComponents/DrawSpriteComponent.h"
 #include "../../Source/BuildTowerHUD.h"
 #include "../Game.h"

@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "Actor.h"
+#include "../Actor.h"
 
 class NormalArrow : public Actor
 {

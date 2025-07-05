@@ -25,7 +25,7 @@
 #include "Actors/Base.h"
 #include "Actors/Block.h"
 #include "Actors/Enemy/Slime.h"
-#include "Actors/NormalTower.h"
+#include "Actors/Tower/NormalTower.h"
 #include "Actors/BuildSpot.h"
 #include "Actors/EnemyPortal.h"
 #include "UIElements/UIScreen.h"
