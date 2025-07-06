@@ -39,7 +39,8 @@ public:
         MainMenu,
         CornFieldsMap,
         Map2,
-        GameOver
+        GameOver,
+        Victory
     };
 
     enum class SceneManagerState
@@ -57,7 +58,8 @@ public:
         WaitingNextWave,
         GameOver,
         LevelComplete,
-        Leaving
+        Leaving,
+        Victory
     };
 
     struct LevelDefinition {
@@ -83,6 +85,7 @@ public:
     // Level functions
     void LoadMainMenu();
     void LoadGameOverScreen();
+    void LoadVictoryScreen();
     void LoadLevel(const std::string& levelName, const int levelWidth, const int levelHeight);
     int GetTileAt(int x, int y) const;
     int GetLevelTime() const {return mLevelTimer;};

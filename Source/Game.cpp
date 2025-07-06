@@ -130,7 +130,7 @@ bool Game::Initialize()
 void Game::SetGameScene(Game::GameScene scene, float transitionTime)
 {
     if (mSceneManagerState == SceneManagerState::None) {
-        if (scene == GameScene::MainMenu || scene == GameScene::CornFieldsMap || scene == GameScene::Map2 || scene == GameScene::GameOver) {
+        if (scene == GameScene::MainMenu || scene == GameScene::CornFieldsMap || scene == GameScene::Map2 || scene == GameScene::GameOver || scene == GameScene::Victory) {
             mNextScene = scene;
             mSceneManagerState = SceneManagerState::Entering;
             mSceneManagerTimer = transitionTime;
@@ -219,6 +219,13 @@ void Game::ChangeScene()
         mBackgroundColor.Set(166.0f, 176.0f, 79.0f);
 
         LoadGameOverScreen();
+    }else if (mNextScene == GameScene::Victory) {
+        // Set background color
+        mGamePlayState = GamePlayState::Victory;
+
+        mBackgroundColor.Set(166.0f, 176.0f, 79.0f);
+
+        LoadVictoryScreen();
     }
 
 }
@@ -237,6 +244,7 @@ void Game::LoadMainMenu()
     auto button1 = mainMenu->AddButton("START", Vector2(mWindowWidth / 2.0f - 100.0f, 250.0f), Vector2(200.0f, 40.0f), [this]() {
         PlaySound("menu_selected.wav", false);
         SetGameScene(GameScene::CornFieldsMap);
+        //SetGameScene(GameScene::Victory);
     });
 
     auto button2 = mainMenu->AddButton("QUIT", Vector2(mWindowWidth/2.0f - 100.0f, 300.0f), Vector2(200.0f, 40.0f), [this](){
@@ -263,6 +271,29 @@ void Game::LoadGameOverScreen()
         SetGameScene(GameScene::MainMenu);
     });
     auto button2 = gameOverMenu->AddButton("QUIT", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)+50.0f), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
+        Quit();
+});
+}
+
+void Game::LoadVictoryScreen()
+{
+    // Para música anterior
+    mAudio->StopSound(mMusicHandle);
+
+    mMusicHandle = mAudio->PlaySound("Victory.wav", false);
+
+    auto victoryMenu = new UIScreen(this, "../Assets/Fonts/Old_School_Adventures.ttf", mRenderer);
+
+    const Vector2 titleSize = Vector2(mWindowWidth, mWindowHeight);
+    const Vector2 titlePos = Vector2(0.0f, 0.0f);
+    victoryMenu->AddImage("../Assets/Sprites/Victory.png", titlePos, titleSize);
+
+    // Adiciona botão para voltar ao menu
+    auto button1 = victoryMenu->AddButton("MAIN MENU", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
+        PlaySound("menu_selected.wav", false);
+        SetGameScene(GameScene::MainMenu);
+    });
+    auto button2 = victoryMenu->AddButton("QUIT", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)+50.0f), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
         Quit();
 });
 }
@@ -943,7 +974,7 @@ void Game::StartNextLevel() {
 
     if (mCurrentLevel > mLevelProgression.size()) {
         SDL_Log("VOCÊ VENCEU!");
-        // SetGameScene(Game::GameScene::Victory, 2.0f); // Exemplo de tela de vitória
+        SetGameScene(Game::GameScene::Victory, 2.0f); // Exemplo de tela de vitória
         return;
     }
 
