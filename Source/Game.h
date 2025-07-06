@@ -14,6 +14,7 @@
 #include "Math.h"
 #include "Actors/Base.h"
 
+class StartGameHUD;
 class MainHUD;
 class BuildTowerHUD;
 
@@ -86,6 +87,7 @@ public:
     int GetTileAt(int x, int y) const;
     int GetLevelTime() const {return mLevelTimer;};
     MainHUD* GetMainHUD() const {return mMainHUD;};
+    StartGameHUD* GetStartGameHUD() const {return mStartGameHUD;};
 
     std::vector<Actor *> GetNearbyActors(const Vector2& position, const int range = 1);
     std::vector<class AABBColliderComponent *> GetNearbyColliders(const Vector2& position, const int range = 2);
@@ -201,6 +203,7 @@ private:
 
     class MainHUD *mMainHUD;
     class BuildTowerHUD *mBuildTowerHUD;
+    class StartGameHUD *mStartGameHUD;
 
     float mGameTimer;
     int mLevelTimer;

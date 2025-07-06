@@ -21,6 +21,7 @@
 #include "BuildTowerHUD.h"
 #include "MainHUD.h"
 #include "SpatialHashing.h"
+#include "StartGameHUD.h"
 #include "Actors/Actor.h"
 #include "Actors/Base.h"
 #include "Actors/Block.h"
@@ -42,6 +43,8 @@ Game::Game(int windowWidth, int windowHeight)
         ,mWindowWidth(windowWidth)
         ,mWindowHeight(windowHeight)
         ,mMainHUD(nullptr)
+        ,mBuildTowerHUD(nullptr)
+        ,mStartGameHUD(nullptr)
         ,mBackgroundColor(0, 0, 0)
         ,mModColor(255, 255, 255)
         ,mCameraPos(Vector2::Zero)
@@ -189,6 +192,9 @@ void Game::ChangeScene()
         mLevelCoins = 0;
 
         mBuildTowerHUD = new BuildTowerHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
+
+        mStartGameHUD = new StartGameHUD(this, "../Assets/Fonts/SMB.ttf", mRenderer);
+        TogglePause();
 
         mMusicHandle = mAudio->PlaySound("MusicMain.mp3", true);
 
@@ -506,15 +512,7 @@ void Game::ProcessInputActors()
         {
             actor->ProcessInput(state);
 
-            /*if (actor == mMario) {
-                isMarioOnCamera = true;
-            }*/
         }
-
-        // If Mario is not on camera, process input for him
-        /*if (!isMarioOnCamera && mMario) {
-            mMario->ProcessInput(state);
-        }*/
     }
 }
 
@@ -531,16 +529,8 @@ void Game::HandleKeyPressActors(const int key, const bool isPressed)
         for (auto actor: actorsOnCamera) {
             actor->HandleKeyPress(key, isPressed);
 
-            /*if (actor == mMario) {
-                isMarioOnCamera = true;
-            }*/
         }
 
-        // If Mario is not on camera, handle key press for him
-        /*if (!isMarioOnCamera && mMario)
-        {
-            mMario->HandleKeyPress(key, isPressed);
-        }*/
     }
 
 }
@@ -553,7 +543,8 @@ void Game::TogglePause()
         {
             mGamePlayState = GamePlayState::Paused;
 
-            mMainHUD->UpdatePauseButtonIcon(mGamePlayState == GamePlayState::Paused);
+            mMainHUD->UpdatePauseButtonIcon(true);
+            mStartGameHUD->Show();
 
             mAudio->PauseSound(mMusicHandle);
             mAudio->PlaySound("pause.mp3");
@@ -562,7 +553,8 @@ void Game::TogglePause()
         {
             mGamePlayState = GamePlayState::Playing;
 
-            mMainHUD->UpdatePauseButtonIcon(mGamePlayState == GamePlayState::Paused);
+            mMainHUD->UpdatePauseButtonIcon(false);
+            mStartGameHUD->Hide();
 
             mAudio->ResumeSound(mMusicHandle);
             mAudio->PlaySound("pause.mp3");
@@ -620,9 +612,6 @@ void Game::UpdateGame()
         UpdateLevelTime(deltaTime);
     }
 
-    /*if (mGameScene != GameScene::MainMenu && mMainHUD) {
-        UpdateLevelCoins();
-    }*/
 
     if (mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0) {
         SDL_Log("Nível %d concluído!", mCurrentLevel);

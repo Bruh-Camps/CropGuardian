@@ -87,6 +87,8 @@ add_executable(${PROJECT_NAME}
         Source/Actors/Tower/IceTower.h
         Source/Actors/Tower/Tower.cpp
         Source/Actors/Tower/Tower.h
+        Source/StartGameHUD.cpp
+        Source/StartGameHUD.h
 )
 
 target_link_libraries(${PROJECT_NAME} PRIVATE SDL2::SDL2 SDL2_image::SDL2_image ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
