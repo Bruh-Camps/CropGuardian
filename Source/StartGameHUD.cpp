@@ -15,9 +15,9 @@ StartGameHUD::StartGameHUD(Game* game, const std::string& fontName, SDL_Renderer
 
     mBackgroundPanel = AddImage("../Assets/Sprites/HUD/panel.png", panelPos, panelSize);
 
-    std::string message = "Defenda as plantações!\n\nConstrua torres para parar os inimigos.\n\nPressione ENTER para começar ou continuar.";
+    std::string message = "Defend the crops!\n\nBuild towers to stop the enemies.\n\nPress ENTER to start or continue.";
     Vector2 textPos = panelPos + Vector2(190.0f, 170.0f); // ajuste conforme fonte
-    Vector2 mapTextSize(panelSize.x - 350, panelSize.y - 350);
+    Vector2 mapTextSize(panelSize.x - 400, panelSize.y - 350);
     mStartMessage = AddText(message, textPos, mapTextSize); // texto branco
 
 }
