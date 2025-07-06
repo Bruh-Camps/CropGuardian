@@ -57,6 +57,7 @@ BuildTowerHUD::BuildTowerHUD(class Game* game, const std::string& fontName, SDL_
             if (mActiveBuildSpot)
             {
                 if (mGame->GetCurrentBase()->GetCoins()>=100) {
+                    mGame->GetCurrentBase()->DecreaseCoinsBy(100);
                     mActiveBuildSpot->BuildTower(BuildSpot::TowerType::Ice);
                     Hide();
                 }
