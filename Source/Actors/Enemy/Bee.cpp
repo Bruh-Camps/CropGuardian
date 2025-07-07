@@ -5,6 +5,7 @@
 #include "Bee.h"
 #include "../../Components/DrawComponents/DrawAnimatedComponent.h"
 #include "../../Components/RigidBodyComponent.h"
+#include "../../Game.h"
 
 Bee::Bee(Game* game, float forwardSpeed, float deathTime, float life)
     : Enemy(game, forwardSpeed, deathTime, life, 12,
@@ -44,4 +45,10 @@ void Bee::UpdateMovement(float deltaTime)
             SetRotation(0.0f);
             break;
     }
+}
+
+void Bee::Kill()
+{
+    mGame->PlaySound("AbelhaMorrendo.wav", false);
+    Enemy::Kill();
 }
