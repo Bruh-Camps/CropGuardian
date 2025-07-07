@@ -16,7 +16,7 @@ EnemyPortal::EnemyPortal(Game* game, int numWaves, float timeBetweenWaves, float
     mDrawComponent = new DrawAnimatedComponent(this,
                                           "../Assets/Sprites/EnemyPortal/Portal.png",
                                           "../Assets/Sprites/EnemyPortal/Portal.json",
-                                          5);
+                                          4);
 
     mDrawComponent->AddAnimation("Active", {0,1,2,3,4,5,6,7,8});
     mDrawComponent->SetAnimation("Active");

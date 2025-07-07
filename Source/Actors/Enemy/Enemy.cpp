@@ -23,7 +23,7 @@ Enemy::Enemy(Game *game, float forwardSpeed, float deathTime, float life, int co
       , mSlowdownTimer(0.0f)
       , mIsSlowed(false) {
     mRigidBodyComponent = new RigidBodyComponent(this, 1.0f);
-    mDrawComponent = new DrawAnimatedComponent(this, spriteSheet, spriteJson);
+    mDrawComponent = new DrawAnimatedComponent(this, spriteSheet, spriteJson, 5);
 
     // mColliderComponent = new AABBColliderComponent(this, 0, 0, Game::TILE_SIZE, Game::TILE_SIZE, ColliderLayer::Enemy);
 

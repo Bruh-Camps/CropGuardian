@@ -20,7 +20,7 @@ Tower::Tower(Game *game,
     mDrawComponent = new DrawAnimatedComponent(this,
                                                spriteSheet,
                                                spriteJson,
-                                               3);
+                                               20);
 
     mDrawComponent->AddAnimation("Active", {0, 1, 2, 3, 4, 5});
     mDrawComponent->SetAnimation("Active");
