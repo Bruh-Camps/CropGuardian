@@ -4,6 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
+    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
+    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
   </component>
   <component name="CMakePresetLoader">{
@@ -26,8 +28,9 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d250a0b5-da3b-4ca9-9fc9-b29c3d16b63b" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
+    <list default="true" id="ecfd0b93-8df4-45cf-8867-431c6f591420" name="Changes" comment="Fix victory screen">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Game.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Game.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,9 +44,85 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "Bruh-Camps"
+  }
+}]]></component>
+  <component name="GitHubPullRequestState">{
+  &quot;prStates&quot;: [
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOPEqY9s6dea3y&quot;,
+        &quot;number&quot;: 1
+      },
+      &quot;lastSeen&quot;: 1751727515870
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOPEqY9s6dqH7U&quot;,
+        &quot;number&quot;: 2
+      },
+      &quot;lastSeen&quot;: 1751838678723
+    },
+    {
+      &quot;id&quot;: {
+        &quot;id&quot;: &quot;PR_kwDOPEqY9s6dq0tu&quot;,
+        &quot;number&quot;: 3
+      },
+      &quot;lastSeen&quot;: 1751853684759
+    }
+  ]
+}</component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:Bruh-Camps/CropGuardian.git",
+    "accountId": "d2689061-92db-4063-9068-d675b4506e3c"
+  }
+}]]></component>
   <component name="HighlightingSettingsPerFile">
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Enemy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.h" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/EnemyPortal.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/EnemyPortal.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Tower/Tower.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Game.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 5
@@ -65,7 +144,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/alexandre/Dropbox/DropboxOffline/jogos/tp4-gabarito/tp4-smb-1-2-solution&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -75,33 +154,144 @@
   }
 }</component>
   <component name="RunManager">
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="crop-guardian" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="crop-guardian" TARGET_NAME="crop-guardian" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="crop-guardian" RUN_TARGET_NAME="crop-guardian">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="d250a0b5-da3b-4ca9-9fc9-b29c3d16b63b" name="Changes" comment="" />
-      <created>1751748979106</created>
+      <changelist id="ecfd0b93-8df4-45cf-8867-431c6f591420" name="Changes" comment="" />
+      <created>1751330682119</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1751748979106</updated>
-      <workItem from="1751748981835" duration="770000" />
-      <workItem from="1751816957912" duration="2101000" />
-      <workItem from="1751819077507" duration="2981000" />
-      <workItem from="1751822990296" duration="2076000" />
-      <workItem from="1751826973009" duration="5898000" />
-      <workItem from="1751834417738" duration="2488000" />
-      <workItem from="1751841555546" duration="386000" />
-      <workItem from="1751841991366" duration="2991000" />
+      <updated>1751330682119</updated>
+      <workItem from="1751330683360" duration="1273000" />
+      <workItem from="1751413200714" duration="22000" />
+      <workItem from="1751413356343" duration="46000" />
+      <workItem from="1751413473704" duration="637000" />
+      <workItem from="1751498450348" duration="2154000" />
+      <workItem from="1751719889131" duration="120000" />
+      <workItem from="1751720086026" duration="4575000" />
+      <workItem from="1751733029228" duration="168000" />
+      <workItem from="1751733201875" duration="34000" />
+      <workItem from="1751733243285" duration="69000" />
+      <workItem from="1751733319184" duration="45000" />
+      <workItem from="1751737843386" duration="4423000" />
+      <workItem from="1751819168178" duration="1374000" />
+      <workItem from="1751821240152" duration="2579000" />
+      <workItem from="1751823923632" duration="572000" />
+      <workItem from="1751831929877" duration="136000" />
+      <workItem from="1751832077878" duration="12000" />
+      <workItem from="1751832141154" duration="2236000" />
+      <workItem from="1751838401585" duration="128000" />
+      <workItem from="1751838538597" duration="547000" />
+      <workItem from="1751841486581" duration="942000" />
+      <workItem from="1751842561087" duration="2330000" />
+      <workItem from="1751845526215" duration="463000" />
+      <workItem from="1751846347428" duration="682000" />
+      <workItem from="1751852734325" duration="4444000" />
+      <workItem from="1751882146643" duration="2000" />
     </task>
+    <task id="LOCAL-00001" summary="Adiciona rotação à abelha">
+      <option name="closed" value="true" />
+      <created>1751728533929</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1751728533929</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Some fixes and Ogre sprite">
+      <option name="closed" value="true" />
+      <created>1751733091158</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1751733091158</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Adiciona torre de gelo">
+      <option name="closed" value="true" />
+      <created>1751741839663</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1751741839663</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Bugfix na compra da torre de gelo">
+      <option name="closed" value="true" />
+      <created>1751819301729</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1751819301729</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Adiciona Tela de mensagem ao iniciar o jogo">
+      <option name="closed" value="true" />
+      <created>1751833790233</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1751833790233</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fix: traduz mensagem para inglês">
+      <option name="closed" value="true" />
+      <created>1751833992563</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1751833992563</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Adiciona elementos de cenário">
+      <option name="closed" value="true" />
+      <created>1751846910597</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1751846910597</updated>
+    </task>
+    <task id="LOCAL-00008" summary="gitignore">
+      <option name="closed" value="true" />
+      <created>1751853676278</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1751853676278</updated>
+    </task>
+    <task id="LOCAL-00009" summary="gitignore">
+      <option name="closed" value="true" />
+      <created>1751853704923</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1751853704923</updated>
+    </task>
+    <task id="LOCAL-00010" summary="fix draworder">
+      <option name="closed" value="true" />
+      <created>1751855386822</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1751855386822</updated>
+    </task>
+    <task id="LOCAL-00011" summary="fix draworder">
+      <option name="closed" value="true" />
+      <created>1751855817034</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1751855817034</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Fix victory screen">
+      <option name="closed" value="true" />
+      <created>1751856937296</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1751856937296</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -111,5 +301,29 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Adiciona rotação à abelha" />
+    <MESSAGE value="Some fixes and Ogre sprite" />
+    <MESSAGE value="Adiciona torre de gelo" />
+    <MESSAGE value="Bugfix na compra da torre de gelo" />
+    <MESSAGE value="Adiciona Tela de mensagem ao iniciar o jogo" />
+    <MESSAGE value="Fix: traduz mensagem para inglês" />
+    <MESSAGE value="Adiciona elementos de cenário" />
+    <MESSAGE value="gitignore" />
+    <MESSAGE value="fix draworder" />
+    <MESSAGE value="Fix victory screen" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix victory screen" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Source/UIElements/UIScreen.cpp</url>
+          <line>8</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
