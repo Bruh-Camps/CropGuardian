@@ -1029,8 +1029,6 @@ void Game::SetupLevelProgression() {
 void Game::StartNextLevel() {
     mCurrentLevel++;
 
-
-
     const LevelDefinition& currentDef = mLevelProgression[mCurrentLevel - 1];
 
     // Cria um novo portal para o nível
