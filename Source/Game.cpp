@@ -1029,11 +1029,7 @@ void Game::SetupLevelProgression() {
 void Game::StartNextLevel() {
     mCurrentLevel++;
 
-    if (mCurrentLevel > mLevelProgression.size()) {
-        SDL_Log("VOCÊ VENCEU!");
-        SetGameScene(Game::GameScene::Victory, 2.0f); // Exemplo de tela de vitória
-        return;
-    }
+
 
     const LevelDefinition& currentDef = mLevelProgression[mCurrentLevel - 1];
 
