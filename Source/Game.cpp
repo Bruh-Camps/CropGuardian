@@ -265,9 +265,10 @@ void Game::LoadMainMenu()
 void Game::LoadGameOverScreen()
 {
     // Para música anterior
-    mAudio->StopSound(mMusicHandle);
-
-    mMusicHandle = mAudio->PlaySound("GameOverTheme.mp3", false);
+    if (mAudio) {
+        mAudio->StopSound(mMusicHandle);
+        mMusicHandle = mAudio->PlaySound("GameOverTheme.mp3", false);
+    }
 
     auto gameOverMenu = new UIScreen(this, "../Assets/Fonts/Old_School_Adventures.ttf", mRenderer);
 
@@ -280,8 +281,10 @@ void Game::LoadGameOverScreen()
         Vector2(mWindowWidth / 2.0f - 328.0f, 4.0f * (mWindowHeight / 5.0f)),
         Vector2(288.0f, 96.0f),
         [this]() {
-            PlaySound("menu_selected.wav", false);
-            SetGameScene(GameScene::MainMenu);
+            if (mSceneManagerState == SceneManagerState::None) {
+                PlaySound("menu_selected.wav", false);
+                SetGameScene(GameScene::MainMenu);
+            }
         }
     );
 
@@ -298,9 +301,10 @@ void Game::LoadGameOverScreen()
 void Game::LoadVictoryScreen()
 {
     // Para música anterior
-    mAudio->StopSound(mMusicHandle);
-
-    mMusicHandle = mAudio->PlaySound("Victory.wav", false);
+    if (mAudio) {
+        mAudio->StopSound(mMusicHandle);
+        mMusicHandle = mAudio->PlaySound("Victory.wav", false);
+    }
 
     auto victoryMenu = new UIScreen(this, "../Assets/Fonts/Old_School_Adventures.ttf", mRenderer);
 
@@ -314,8 +318,10 @@ void Game::LoadVictoryScreen()
         Vector2(mWindowWidth / 2.0f - 328.0f, 4.0f * (mWindowHeight / 5.0f)),
         Vector2(288.0f, 96.0f),
         [this]() {
-            PlaySound("menu_selected.wav", false);
-            SetGameScene(GameScene::MainMenu);
+            if (mSceneManagerState == SceneManagerState::None) {
+                PlaySound("menu_selected.wav", false);
+                SetGameScene(GameScene::MainMenu);
+            }
         }
     );
 
@@ -671,7 +677,9 @@ void Game::TogglePause()
             mMainHUD->UpdatePauseButtonIcon(true);
             mStartGameHUD->Show();
 
-            mAudio->PauseSound(mMusicHandle);
+            if (mMusicHandle.IsValid()) {
+                mAudio->PauseSound(mMusicHandle);
+            }
             mAudio->PlaySound("pause.mp3");
         }
         else if (mGamePlayState == GamePlayState::Paused || mGamePlayState == GamePlayState::WaitingNextWave)
@@ -737,7 +745,7 @@ void Game::UpdateGame()
         UpdateLevelTime(deltaTime);
     }
 
-    if (mGameScene == GameScene::CornFieldsMap && mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0) {
+    if (mGameScene == GameScene::CornFieldsMap && mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0 && mSceneManagerState == SceneManagerState::None) {
         StartNextLevel();
     }
 }
@@ -1019,8 +1027,14 @@ void Game::UnloadScene()
     mMainHUD = nullptr;
     mBuildTowerHUD = nullptr;
     mStartGameHUD = nullptr;
-    mCurrentPortal = nullptr;
+
     mCurrentBase = nullptr;
+    mCurrentPortal = nullptr;
+    mHoveredSpot = nullptr;
+
+    mEnemyCount = 0;
+
+    mLevelProgression.clear();
 }
 
 void Game::Shutdown()
@@ -1085,7 +1099,9 @@ void Game::StartNextLevel() {
     mCurrentPortal->SetPosition(Vector2(0, (17 * TILE_SIZE + TILE_SIZE/2 - 4)));
 
     // Atualiza o HUD
-    mMainHUD->SetLevel(mCurrentLevel);
+    if (mMainHUD) {
+        mMainHUD->SetLevel(mCurrentLevel);
+    }
 }
 
 int Game::GetEnemiesPerWaveForCurrentLevel() const
