@@ -61,7 +61,6 @@ void Base::OnUpdate(float deltaTime) {
 
                 // Verifica se as vidas acabaram
                 if (mLives <= 0) {
-                    SDL_Log("Game Over!");
                     mGame->SetGameScene(Game::GameScene::GameOver, 1.0f);
                     return;
                 }
