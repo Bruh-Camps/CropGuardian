@@ -202,7 +202,7 @@ void Game::ChangeScene()
         mBackgroundColor.Set(166.0f, 176.0f, 79.0f);
 
         // Initialize actors
-        LoadLevel("../Assets/Levels/level1.csv", LEVEL_WIDTH, LEVEL_HEIGHT);
+        LoadLevel("../Assets/Levels/level1_path.csv", "../Assets/Levels/level1_scenary.csv", LEVEL_WIDTH, LEVEL_HEIGHT);
 
         // Base a ser defendida (o número de vidas deve condizer com o HUD)
         auto base = new Base(this, 5, 200);
@@ -298,10 +298,11 @@ void Game::LoadVictoryScreen()
 });
 }
 
-void Game::LoadLevel(const std::string& levelName, const int levelWidth, const int levelHeight)
+void Game::LoadLevel(const std::string& levelPath, const std::string& scenaryPath, const int levelWidth, const int levelHeight)
 {
-    // Load level data
-    int **mLevelData = ReadLevelData(levelName, levelWidth, levelHeight);
+    int **mLevelData = ReadLevelData(levelPath, levelWidth, levelHeight);
+
+    int **mLevelScenary = ReadLevelData(scenaryPath, levelWidth, levelHeight);
 
     if (!mLevelData) {
         SDL_Log("Failed to load level data");
@@ -309,68 +310,108 @@ void Game::LoadLevel(const std::string& levelName, const int levelWidth, const i
     }
 
     // Instantiate level actors
-    BuildLevel(mLevelData, levelWidth, levelHeight);
+    BuildLevel(mLevelData, mLevelScenary, levelWidth, levelHeight);
 }
 
-void Game::BuildLevel(int** levelData, int width, int height)
+void Game::BuildLevel(int** levelData, int** levelScenary, int width, int height)
 {
     mLevelData = levelData;
 
-    // Const map to convert tile ID to block type
     const std::map<int, const std::string> tileMap = {
-            {13, "../Assets/Sprites/Blocks/grass.png"}, // Bloco verde: grama
-            {6, "../Assets/Sprites/Blocks/path_horizontal.png"},        // Caminho horizontal
-            {3, "../Assets/Sprites/Blocks/path_vertical.png"},          // Caminho vertical
-            {12, "../Assets/Sprites/Blocks/botton_right.png"},  // canto dir inferior do caminho
-            {10, "../Assets/Sprites/Blocks/top_right.png"},     // canto dir superior do caminho
-            {2, "../Assets/Sprites/Blocks/botton_left.png"},    // canto esq inferior do caminho
-            {17, "../Assets/Sprites/Blocks/top_left.png"}      // canto esq superior do caminho
+        {13, "../Assets/Sprites/Blocks/grass.png"},
+        {6,  "../Assets/Sprites/Blocks/path_horizontal.png"},
+        {3,  "../Assets/Sprites/Blocks/path_vertical.png"},
+        {12, "../Assets/Sprites/Blocks/botton_right.png"},
+        {10, "../Assets/Sprites/Blocks/top_right.png"},
+        {2,  "../Assets/Sprites/Blocks/botton_left.png"},
+        {17, "../Assets/Sprites/Blocks/top_left.png"}
     };
 
+    const std::map<int, const std::string> scenaryMap = {
+        {0,  "../Assets/Levels/Scenario/12.png"},
+        {1,  "../Assets/Levels/Scenario/13.png"},
+        {2,  "../Assets/Levels/Scenario/15.png"},
+        {3,  "../Assets/Levels/Scenario/Autumn_bush1.png"},
+        {4,  "../Assets/Levels/Scenario/Blue-green_crystal_light_shadow3.png"},
+        {5,  "../Assets/Levels/Scenario/Bush_blue_flowers1.png"},
+        {6,  "../Assets/Levels/Scenario/Bush_orange_flowers1.png"},
+        {7,  "../Assets/Levels/Scenario/Bush_pink_flowers1.png"},
+        {8,  "../Assets/Levels/Scenario/Bush_red_flowers1.png"},
+        {9,  "../Assets/Levels/Scenario/Bush_simple1_1.png"},
+        {10, "../Assets/Levels/Scenario/Cactus2_1.png"},
+        {11, "../Assets/Levels/Scenario/corn.png"},
+        {12, "../Assets/Levels/Scenario/Fern1_1.png"},
+        {13, "../Assets/Levels/Scenario/Fern2_1.png"},
+        {14, "../Assets/Levels/Scenario/mushroom1_light_shadow3.png"},
+        {15, "../Assets/Levels/Scenario/mushroom4_light_shadow3.png"},
+        {16, "../Assets/Levels/Scenario/Orange_mushrooms2_grass_shadow.png"},
+        {17, "../Assets/Levels/Scenario/Snow_bush1.png"},
+        {18, "../Assets/Levels/Scenario/Stone_pyramid2_grass_shadow.png"},
+        {19, "../Assets/Levels/Scenario/Stone_pyramid3_grass_shadow.png"},
+        {20, "../Assets/Levels/Scenario/Stone_pyramid3_ground_shadow.png"},
+        {21, "../Assets/Levels/Scenario/Tree1.png"},
+        {22, "../Assets/Levels/Scenario/6.png"},
+        {23, "../Assets/Levels/Scenario/5.png"}
+    };
 
     std::vector<std::vector<bool>> consumed(height, std::vector<bool>(width, false));
 
-    for (int y = 0; y < LEVEL_HEIGHT; ++y)
+    // --- Primeiro loop: terreno e blocos sólidos ---
+    for (int y = 0; y < height; ++y)
     {
-        for (int x = 0; x < LEVEL_WIDTH; ++x)
+        for (int x = 0; x < width; ++x)
         {
             if (consumed[y][x]) continue;
 
             int tile = levelData[y][x];
 
-            if(tile == 100000) // TODO: Instanciar o portal de inimigos
+            if (tile == 100000)
             {
-
+                // TODO: Portal de inimigos
+                continue;
             }
-            // Build Spot
-            else if (tile == TILE_PLACE_TL &&
-                    x + 1 <  width && y + 1 < height &&
-                    levelData[y][x+1] == TILE_PLACE_TR &&
-                    levelData[y+1][x] == TILE_PLACE_BL &&
-                    levelData[y+1][x+1] == TILE_PLACE_BR)
+
+            // Verifica formação de BuildSpot (bloco 2x2)
+            if (tile == TILE_PLACE_TL &&
+                x + 1 < width && y + 1 < height &&
+                levelData[y][x + 1] == TILE_PLACE_TR &&
+                levelData[y + 1][x] == TILE_PLACE_BL &&
+                levelData[y + 1][x + 1] == TILE_PLACE_BR)
             {
-                BuildSpot* spot = new BuildSpot(this, Vector2(2*TILE_SIZE, 2*TILE_SIZE));
+                BuildSpot* spot = new BuildSpot(this, Vector2(2 * TILE_SIZE, 2 * TILE_SIZE));
                 spot->SetPosition(Vector2(x * TILE_SIZE, y * TILE_SIZE));
-
-                // Mark the 4 cells so we don’t process them twice
-                consumed[y][x]     = true;
-                consumed[y][x+1]   = true;
-                consumed[y+1][x]   = true;
-                consumed[y+1][x+1] = true;
+                consumed[y][x] = consumed[y][x + 1] = consumed[y + 1][x] = consumed[y + 1][x + 1] = true;
+                continue;
             }
-            else // Blocks
+
+            // Tile comum (grama, estrada, curva, etc)
+            auto it = tileMap.find(tile);
+            if (it != tileMap.end())
             {
-                auto it = tileMap.find(tile);
-                if (it != tileMap.end())
-                {
-                    // Create a block actor
-                    Block* block = new Block(this, it->second, true);
-                    block->SetPosition(Vector2(x * TILE_SIZE, y * TILE_SIZE));
-                }
+                Block* block = new Block(this, it->second, Game::TILE_SIZE, Game::TILE_SIZE, true, 1); // camada 1, sólido
+                block->SetPosition(Vector2(x * TILE_SIZE, y * TILE_SIZE));
+            }
+        }
+    }
+
+    // --- Segundo loop: objetos de cenário decorativos (camada 2) ---
+    for (int y = 0; y < height; ++y)
+    {
+        for (int x = 0; x < width; ++x)
+        {
+            int scenaryId = levelScenary[y][x];
+            auto it = scenaryMap.find(scenaryId);
+            if (it != scenaryMap.end())
+            {
+                auto [imgW, imgH] = GetImageSize(mRenderer, it->second);
+                Block* decor = new Block(this, it->second, imgW, imgH, false, 2); // camada 2, não sólido
+
+                decor->SetPosition(Vector2(x * TILE_SIZE, y * TILE_SIZE));
             }
         }
     }
 }
+
 
 int **Game::ReadLevelData(const std::string& fileName, int width, int height)
 {
@@ -425,6 +466,22 @@ int Game::GetTileAt(int x, int y) const
         return mLevelData[y+1][x+1]; // y antes porque é uma matriz de linhas
     }
     return -1; // valor inválido para indicar erro
+}
+
+std::pair<int, int> Game::GetImageSize(SDL_Renderer* renderer, const std::string& path)
+{
+    SDL_Texture* texture = IMG_LoadTexture(renderer, path.c_str());
+    if (!texture)
+    {
+        SDL_Log("Erro ao carregar textura %s: %s", path.c_str(), SDL_GetError());
+        return { 32, 32 }; // fallback
+    }
+
+    int w, h;
+    SDL_QueryTexture(texture, nullptr, nullptr, &w, &h);
+    SDL_DestroyTexture(texture); // evita vazamento de memória
+
+    return { w, h };
 }
 
 void Game::RunLoop()

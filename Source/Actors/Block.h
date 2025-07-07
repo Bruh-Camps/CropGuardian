@@ -10,7 +10,7 @@
 class Block : public Actor
 {
 public:
-    explicit Block(Game* game, const std::string &texturePath, const bool isStatic = true);
+    explicit Block(Game* game, const std::string &texturePath, int width, int height, const bool isStatic = true, int drawOrder = 1);
 
     void SetPosition(const Vector2& position)
     {

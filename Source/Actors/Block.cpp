@@ -4,10 +4,10 @@
 #include "../Components/DrawComponents/DrawPolygonComponent.h"
 #include "../Components/ColliderComponents/AABBColliderComponent.h"
 
-Block::Block(Game* game, const std::string &texturePath, const bool isStatic)
+Block::Block(Game* game, const std::string &texturePath, int width, int height, const bool isStatic, int drawOrder)
         :Actor(game)
 {
-    new DrawSpriteComponent(this, texturePath, Game::TILE_SIZE, Game::TILE_SIZE, 1);
+    new DrawSpriteComponent(this, texturePath, width, height, drawOrder);
     mColliderComponent = new AABBColliderComponent(this, 0, 0, Game::TILE_SIZE, Game::TILE_SIZE, ColliderLayer::Blocks, isStatic);
     mRigidBodyComponent = new RigidBodyComponent(this, 1.0f, 0.0f, false);
 

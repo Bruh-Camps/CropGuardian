@@ -86,7 +86,7 @@ public:
     void LoadMainMenu();
     void LoadGameOverScreen();
     void LoadVictoryScreen();
-    void LoadLevel(const std::string& levelName, const int levelWidth, const int levelHeight);
+    void LoadLevel(const std::string& levelName, const std::string& scenaryPath, const int levelWidth, const int levelHeight);
     int GetTileAt(int x, int y) const;
     int GetLevelTime() const {return mLevelTimer;};
     MainHUD* GetMainHUD() const {return mMainHUD;};
@@ -163,8 +163,9 @@ private:
 
     // Load the level from a CSV file as a 2D array
     int **ReadLevelData(const std::string& fileName, int width, int height);
-    void BuildLevel(int** levelData, int width, int height);
+    void BuildLevel(int** levelData, int** mLevelScenary, int width, int height);
     int** mLevelData = nullptr;
+    static std::pair<int, int> GetImageSize(SDL_Renderer* renderer, const std::string& path);
 
     // Spatial Hashing for collision detection
     class SpatialHashing* mSpatialHashing;
