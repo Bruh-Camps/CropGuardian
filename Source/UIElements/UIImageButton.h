@@ -19,8 +19,12 @@ public:
 
     void SetTexture(const std::string& imagePath);
 
+    void SetHighlighted(bool highlighted) { mHighlighted = highlighted; }
+
 private:
     SDL_Texture* mTexture;
     SDL_Renderer* mRenderer;
     std::function<void()> mOnClick;
+
+    bool mHighlighted = false;
 };
