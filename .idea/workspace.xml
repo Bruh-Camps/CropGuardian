@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="BackendCodeEditorMiscSettings">
-    <option name="/Default/RiderDebugger/RiderRestoreDecompile/RestoreDecompileSetting/@EntryValue" value="false" type="bool" />
-    <option name="/Default/Housekeeping/GlobalSettingsUpgraded/IsUpgraded/@EntryValue" value="true" type="bool" />
     <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexedValue" value="true" type="bool" />
-    <option name="/Default/Housekeeping/FeatureSuggestion/FeatureSuggestionManager/DisabledSuggesters/=SwitchToGoToActionSuggester/@EntryIndexRemoved" />
   </component>
   <component name="CMakePresetLoader">{
   &quot;useNewFormat&quot;: true
@@ -29,9 +26,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ecfd0b93-8df4-45cf-8867-431c6f591420" name="Changes" comment="Adiciona elementos de cenário">
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Levels/.~lock.level1_scenary.csv#" afterDir="false" />
+    <list default="true" id="d250a0b5-da3b-4ca9-9fc9-b29c3d16b63b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/editor.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/editor.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -46,67 +41,14 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory">{
-  &quot;history&quot;: [
-    {
-      &quot;state&quot;: &quot;OPEN&quot;
-    }
-  ],
-  &quot;lastFilter&quot;: {
-    &quot;state&quot;: &quot;OPEN&quot;
-  }
-}</component>
-  <component name="GitHubPullRequestState"><![CDATA[{
-  "prStates": [
-    {
-      "id": {
-        "id": "PR_kwDOPEqY9s6dea3y",
-        "number": 1
-      },
-      "lastSeen": 1751727515870
-    },
-    {
-      "id": {
-        "id": "PR_kwDOPEqY9s6dqH7U",
-        "number": 2
-      },
-      "lastSeen": 1751838678723
-    },
-    {
-      "id": {
-        "id": "PR_kwDOPEqY9s6dq0tu",
-        "number": 3
-      },
-      "lastSeen": 1751852795669
-    }
-  ]
-}]]></component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;git@github.com:Bruh-Camps/CropGuardian.git&quot;,
-    &quot;accountId&quot;: &quot;d2689061-92db-4063-9068-d675b4506e3c&quot;
-  }
-}</component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Bee.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.h" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian/Source/Actors/Enemy/Slime.h" root0="SKIP_HIGHLIGHTING" />
-  </component>
-  <component name="ProjectApplicationVersion">
-    <option name="ide" value="CLion" />
-    <option name="majorVersion" value="2024" />
-    <option name="minorVersion" value="3.4" />
-    <option name="productBranch" value="Classic" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
-  &quot;associatedIndex&quot;: 4
+  &quot;associatedIndex&quot;: 5
 }</component>
-  <component name="ProjectId" id="2zFdJMQFhKmHXlifokogK6Mkggo" />
+  <component name="ProjectId" id="2zTJ9WelG0NoYUrsLA4O859exA9" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -123,7 +65,7 @@
     &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
     &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/home/bec/Desktop/Desenv Jogos digitais/Trab final/Crop_guardian&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/alexandre/Dropbox/DropboxOffline/jogos/tp4-gabarito/tp4-smb-1-2-solution&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -132,109 +74,34 @@
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/Source/Actors/Tower" />
-    </key>
-  </component>
   <component name="RunManager">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="crop-guardian" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" EMULATE_TERMINAL="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="crop-guardian" TARGET_NAME="crop-guardian" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="crop-guardian" RUN_TARGET_NAME="crop-guardian">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
   </component>
-  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ecfd0b93-8df4-45cf-8867-431c6f591420" name="Changes" comment="" />
-      <created>1751330682119</created>
+      <changelist id="d250a0b5-da3b-4ca9-9fc9-b29c3d16b63b" name="Changes" comment="" />
+      <created>1751748979106</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1751330682119</updated>
-      <workItem from="1751330683360" duration="1273000" />
-      <workItem from="1751413200714" duration="22000" />
-      <workItem from="1751413356343" duration="46000" />
-      <workItem from="1751413473704" duration="637000" />
-      <workItem from="1751498450348" duration="2154000" />
-      <workItem from="1751719889131" duration="120000" />
-      <workItem from="1751720086026" duration="4575000" />
-      <workItem from="1751733029228" duration="168000" />
-      <workItem from="1751733201875" duration="34000" />
-      <workItem from="1751733243285" duration="69000" />
-      <workItem from="1751733319184" duration="45000" />
-      <workItem from="1751737843386" duration="4423000" />
-      <workItem from="1751819168178" duration="1374000" />
-      <workItem from="1751821240152" duration="2579000" />
-      <workItem from="1751823923632" duration="572000" />
-      <workItem from="1751831929877" duration="136000" />
-      <workItem from="1751832077878" duration="12000" />
-      <workItem from="1751832141154" duration="2236000" />
-      <workItem from="1751838401585" duration="128000" />
-      <workItem from="1751838538597" duration="547000" />
-      <workItem from="1751841486581" duration="942000" />
-      <workItem from="1751842561087" duration="2330000" />
-      <workItem from="1751845526215" duration="463000" />
-      <workItem from="1751846347428" duration="682000" />
-      <workItem from="1751852734325" duration="804000" />
+      <updated>1751748979106</updated>
+      <workItem from="1751748981835" duration="770000" />
+      <workItem from="1751816957912" duration="2101000" />
+      <workItem from="1751819077507" duration="2981000" />
+      <workItem from="1751822990296" duration="2076000" />
+      <workItem from="1751826973009" duration="5898000" />
+      <workItem from="1751834417738" duration="2488000" />
+      <workItem from="1751841555546" duration="386000" />
+      <workItem from="1751841991366" duration="2991000" />
     </task>
-    <task id="LOCAL-00001" summary="Adiciona rotação à abelha">
-      <option name="closed" value="true" />
-      <created>1751728533929</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1751728533929</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Some fixes and Ogre sprite">
-      <option name="closed" value="true" />
-      <created>1751733091158</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1751733091158</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Adiciona torre de gelo">
-      <option name="closed" value="true" />
-      <created>1751741839663</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1751741839663</updated>
-    </task>
-    <task id="LOCAL-00004" summary="Bugfix na compra da torre de gelo">
-      <option name="closed" value="true" />
-      <created>1751819301729</created>
-      <option name="number" value="00004" />
-      <option name="presentableId" value="LOCAL-00004" />
-      <option name="project" value="LOCAL" />
-      <updated>1751819301729</updated>
-    </task>
-    <task id="LOCAL-00005" summary="Adiciona Tela de mensagem ao iniciar o jogo">
-      <option name="closed" value="true" />
-      <created>1751833790233</created>
-      <option name="number" value="00005" />
-      <option name="presentableId" value="LOCAL-00005" />
-      <option name="project" value="LOCAL" />
-      <updated>1751833790233</updated>
-    </task>
-    <task id="LOCAL-00006" summary="Fix: traduz mensagem para inglês">
-      <option name="closed" value="true" />
-      <created>1751833992563</created>
-      <option name="number" value="00006" />
-      <option name="presentableId" value="LOCAL-00006" />
-      <option name="project" value="LOCAL" />
-      <updated>1751833992563</updated>
-    </task>
-    <task id="LOCAL-00007" summary="Adiciona elementos de cenário">
-      <option name="closed" value="true" />
-      <created>1751846910597</created>
-      <option name="number" value="00007" />
-      <option name="presentableId" value="LOCAL-00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1751846910597</updated>
-    </task>
-    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,26 +111,5 @@
     <isAutomaticCheckingOnLaunch value="false" />
     <isAutomaticFoundErrors value="true" />
     <isAutomaticReloadCMake value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Adiciona rotação à abelha" />
-    <MESSAGE value="Some fixes and Ogre sprite" />
-    <MESSAGE value="Adiciona torre de gelo" />
-    <MESSAGE value="Bugfix na compra da torre de gelo" />
-    <MESSAGE value="Adiciona Tela de mensagem ao iniciar o jogo" />
-    <MESSAGE value="Fix: traduz mensagem para inglês" />
-    <MESSAGE value="Adiciona elementos de cenário" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adiciona elementos de cenário" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/Source/UIElements/UIScreen.cpp</url>
-          <line>8</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

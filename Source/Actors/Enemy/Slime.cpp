@@ -38,3 +38,9 @@ void Slime::UpdateMovement(float deltaTime)
             break;
     }
 }
+
+void Slime::Kill()
+{
+    mGame->PlaySound("SlimeMorrendo.wav", false);
+    Enemy::Kill(); // executa a lógica comum de morte
+}
