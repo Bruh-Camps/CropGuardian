@@ -17,7 +17,7 @@ DrawAnimatedComponent::DrawAnimatedComponent(class Actor* owner, const std::stri
 
 DrawAnimatedComponent::~DrawAnimatedComponent()
 {
-    DrawSpriteComponent::~DrawSpriteComponent();
+    //DrawSpriteComponent::~DrawSpriteComponent();
 
     for (const auto& rect : mSpriteSheetData)
     {
