@@ -241,15 +241,24 @@ void Game::LoadMainMenu()
     const Vector2 titlePos = Vector2(0.0f, 0.0f);
     mainMenu->AddImage("../Assets/Sprites/Logo.png", titlePos, titleSize);
 
-    auto button1 = mainMenu->AddButton("START", Vector2(mWindowWidth / 2.0f - 100.0f, 250.0f), Vector2(200.0f, 40.0f), [this]() {
-        PlaySound("menu_selected.wav", false);
-        SetGameScene(GameScene::CornFieldsMap);
-        //SetGameScene(GameScene::Victory);
-    });
+    auto button1 = mainMenu->AddImageButton(
+        "../Assets/Sprites/Buttons/play_button.png",
+        Vector2(mWindowWidth / 2.0f - 353.0f, mWindowHeight - 180.0f),
+        Vector2(288.0f, 96.0f),
+        [this]() {
+            PlaySound("menu_selected.wav", false);
+            SetGameScene(GameScene::CornFieldsMap);
+        }
+    );
 
-    auto button2 = mainMenu->AddButton("QUIT", Vector2(mWindowWidth/2.0f - 100.0f, 300.0f), Vector2(200.0f, 40.0f), [this](){
-        Quit();
-    });
+    auto button2 = mainMenu->AddImageButton(
+        "../Assets/Sprites/Buttons/exit_button.png",
+        Vector2(mWindowWidth/2.0f - 45.0f, mWindowHeight - 180.0f),
+        Vector2(288.0f, 96.0f),
+        [this](){
+            Quit();
+        }
+    );
 }
 
 void Game::LoadGameOverScreen()
@@ -265,14 +274,24 @@ void Game::LoadGameOverScreen()
     const Vector2 titlePos = Vector2(0.0f, 0.0f);
     gameOverMenu->AddImage("../Assets/Sprites/GameOver.png", titlePos, titleSize);
 
-    // Adiciona botão para voltar ao menu
-    auto button1 = gameOverMenu->AddButton("MAIN MENU", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
-        PlaySound("menu_selected.wav", false);
-        SetGameScene(GameScene::MainMenu);
-    });
-    auto button2 = gameOverMenu->AddButton("QUIT", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)+50.0f), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
-        Quit();
-});
+    gameOverMenu->AddImageButton(
+        "../Assets/Sprites/Buttons/menu_button.png",
+        Vector2(mWindowWidth / 2.0f - 328.0f, 4.0f * (mWindowHeight / 5.0f)),
+        Vector2(288.0f, 96.0f),
+        [this]() {
+            PlaySound("menu_selected.wav", false);
+            SetGameScene(GameScene::MainMenu);
+        }
+    );
+
+    gameOverMenu->AddImageButton(
+        "../Assets/Sprites/Buttons/exit_button.png",
+        Vector2(mWindowWidth / 2.0f, 4.0f * (mWindowHeight / 5.0f)),
+        Vector2(288.0f, 96.0f),
+        [this]() {
+            Quit();
+        }
+    );
 }
 
 void Game::LoadVictoryScreen()
@@ -289,13 +308,24 @@ void Game::LoadVictoryScreen()
     victoryMenu->AddImage("../Assets/Sprites/Victory.png", titlePos, titleSize);
 
     // Adiciona botão para voltar ao menu
-    auto button1 = victoryMenu->AddButton("MAIN MENU", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
-        PlaySound("menu_selected.wav", false);
-        SetGameScene(GameScene::MainMenu);
-    });
-    auto button2 = victoryMenu->AddButton("QUIT", Vector2(mWindowWidth / 2.0f - 150.0f, 4.0f*(mWindowHeight/5)+50.0f), Vector2(mWindowWidth / 4.0f, mWindowHeight / 10.0f), [this]() {
-        Quit();
-});
+    victoryMenu->AddImageButton(
+        "../Assets/Sprites/Buttons/menu_button.png",
+        Vector2(mWindowWidth / 2.0f - 328.0f, 4.0f * (mWindowHeight / 5.0f)),
+        Vector2(288.0f, 96.0f),
+        [this]() {
+            PlaySound("menu_selected.wav", false);
+            SetGameScene(GameScene::MainMenu);
+        }
+    );
+
+    victoryMenu->AddImageButton(
+        "../Assets/Sprites/Buttons/exit_button.png",
+        Vector2(mWindowWidth / 2.0f, 4.0f * (mWindowHeight / 5.0f)),
+        Vector2(288.0f, 96.0f),
+        [this]() {
+            Quit();
+        }
+    );
 }
 
 void Game::LoadLevel(const std::string& levelPath, const std::string& scenaryPath, const int levelWidth, const int levelHeight)
@@ -548,6 +578,12 @@ void Game::ProcessInput()
                 }
             break;
         }
+    }
+
+    int mouseX, mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
+    if (!mUIStack.empty()) {
+        mUIStack.back()->ProcessMouseHover(mouseX, mouseY);
     }
 
     ProcessMouseHover();

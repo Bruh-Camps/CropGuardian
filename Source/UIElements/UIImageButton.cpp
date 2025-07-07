@@ -45,10 +45,28 @@ void UIImageButton::Draw(SDL_Renderer* renderer, const Vector2& screenPos) {
     if (!mTexture) return;
 
     SDL_Rect dst;
-    dst.x = static_cast<int>(screenPos.x + mPosition.x);
-    dst.y = static_cast<int>(screenPos.y + mPosition.y);
-    dst.w = static_cast<int>(mSize.x);
-    dst.h = static_cast<int>(mSize.y);
+
+    if (mHighlighted)
+    {
+        // Desenha 10% maior
+        const float scaleFactor = 1.1f;
+        Vector2 scaledSize = mSize * scaleFactor;
+
+        Vector2 center = mPosition + mSize * 0.5f;
+        Vector2 scaledPos = center - scaledSize * 0.5f;
+
+        dst.x = static_cast<int>(screenPos.x + scaledPos.x);
+        dst.y = static_cast<int>(screenPos.y + scaledPos.y);
+        dst.w = static_cast<int>(scaledSize.x);
+        dst.h = static_cast<int>(scaledSize.y);
+    }
+    else
+    {
+        dst.x = static_cast<int>(screenPos.x + mPosition.x);
+        dst.y = static_cast<int>(screenPos.y + mPosition.y);
+        dst.w = static_cast<int>(mSize.x);
+        dst.h = static_cast<int>(mSize.y);
+    }
 
     SDL_RenderCopy(renderer, mTexture, nullptr, &dst);
 }

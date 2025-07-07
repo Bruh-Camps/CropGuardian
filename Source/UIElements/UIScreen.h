@@ -41,6 +41,7 @@ public:
 	virtual void ProcessInput(const uint8_t* keys);
 	virtual void HandleKeyPress(int key);
 	virtual void ProcessMouseClick(int mouseX, int mouseY);
+	virtual void ProcessMouseHover(int mouseX, int mouseY);
 
     // Set state to closing
 	void Close();
@@ -75,6 +76,8 @@ protected:
 	std::vector<UIImageButton*> mImageButtons;
     std::vector<UIText *> mTexts;
     std::vector<UIImage *> mImages;
+
+	UIImageButton* mHoveredImageButton = nullptr;
 
 	SDL_Renderer* mRenderer;
 };
