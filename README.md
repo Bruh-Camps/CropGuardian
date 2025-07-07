@@ -7,6 +7,7 @@
 ![Gameplay](Docs/02_gameplay.png)
 ![Gameplay](Docs/03_gameplay.png)
 ![Game Over](Docs/04_gameover.png)
+![Victory](Docs/05_victory.png)
 
 ### 2. Título: **Crop Guardian**
 
@@ -31,8 +32,8 @@ Durante o gameplay, o jogador ouve músicas e efeitos que ajudam na imersão. A 
 ### 5. Créditos
 
 - **Bruno Esteves Campoi** – Lógica dos inimigos, Portal, Torres
-- **Frederico Baker** – HUD, Torres
-- **Alexandre Silva de Menezes Guerra** – Menu, áudio, Game Over
+- **Frederico Baker** – HUD, Torres, Abelha, Níveis
+- **Alexandre Silva de Menezes Guerra** – Menu, áudio, Game Over, Vitória
 
 
 

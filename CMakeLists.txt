@@ -63,6 +63,8 @@ add_executable(${PROJECT_NAME}
         Source/MainHUD.h
         Source/BuildTowerHUD.cpp
         Source/BuildTowerHUD.h
+        Source/StartGameHUD.cpp
+        Source/StartGameHUD.h
         Source/UIElements/UIImage.cpp
         Source/UIElements/UIImage.h
         Source/SpatialHashing.cpp

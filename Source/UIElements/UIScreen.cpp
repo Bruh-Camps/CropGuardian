@@ -187,3 +187,33 @@ UIImageButton* UIScreen::AddImageButton(const std::string& imagePath, const Vect
     mImageButtons.emplace_back(button);
     return button;
 }
+
+void UIScreen::ProcessMouseHover(int mouseX, int mouseY)
+{
+    Vector2 mousePos(static_cast<float>(mouseX), static_cast<float>(mouseY));
+
+    UIImageButton* newHovered = nullptr;
+
+    for (auto button : mImageButtons) {
+        Vector2 pos = button->GetPosition() + mPos;
+        Vector2 size = button->GetSize();
+        if (mousePos.x >= pos.x && mousePos.x <= pos.x + size.x &&
+            mousePos.y >= pos.y && mousePos.y <= pos.y + size.y)
+        {
+            newHovered = button;
+            break;
+        }
+    }
+
+    if (newHovered != mHoveredImageButton) {
+        if (mHoveredImageButton) {
+            mHoveredImageButton->SetHighlighted(false);
+        }
+
+        if (newHovered) {
+            newHovered->SetHighlighted(true);
+        }
+
+        mHoveredImageButton = newHovered;
+    }
+}
