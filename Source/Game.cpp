@@ -1,7 +1,7 @@
 // ----------------------------------------------------------------
 // From Game Programming in C++ by Sanjay Madhav
 // Copyright (C) 2017 Sanjay Madhav. All rights reserved.
-// 
+//
 // Released under the BSD License
 // See LICENSE in root directory for full details.
 // ----------------------------------------------------------------
@@ -184,6 +184,7 @@ void Game::ChangeScene()
         mMainHUD->SetLives(5, 5);
 
         // Seta o próximo nível e cria o portal
+        mCurrentLevel = 0;
         SetupLevelProgression();
         StartNextLevel();
 
@@ -736,10 +737,7 @@ void Game::UpdateGame()
         UpdateLevelTime(deltaTime);
     }
 
-
-    if (mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0) {
-        SDL_Log("Nível %d concluído!", mCurrentLevel);
-
+    if (mGameScene == GameScene::CornFieldsMap && mCurrentPortal && mCurrentPortal->AreAllWavesFinished() && mEnemyCount == 0) {
         StartNextLevel();
     }
 }
@@ -1017,6 +1015,12 @@ void Game::UnloadScene()
         delete[] mLevelData;
         mLevelData = nullptr;
     }
+
+    mMainHUD = nullptr;
+    mBuildTowerHUD = nullptr;
+    mStartGameHUD = nullptr;
+    mCurrentPortal = nullptr;
+    mCurrentBase = nullptr;
 }
 
 void Game::Shutdown()
@@ -1065,7 +1069,10 @@ void Game::SetupLevelProgression() {
 void Game::StartNextLevel() {
     mCurrentLevel++;
 
-
+    if (mCurrentLevel > mLevelProgression.size() && mGameScene != GameScene::Victory) {
+        SetGameScene(GameScene::Victory, 1.0f);
+        return;
+    }
 
     const LevelDefinition& currentDef = mLevelProgression[mCurrentLevel - 1];
 
